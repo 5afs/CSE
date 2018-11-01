@@ -100,8 +100,8 @@ while a < 10:
     a += 1  # This is the same thing as a = a + 1
 
 '''
-Hints with oops:
-For loops - Use when you know EXACTLy how many iterations
+Hints with loops:
+For loops - Use when you know EXACTLY how many iterations
 While loops - Use when you DON'T know how may iterations
 '''
 
@@ -126,3 +126,11 @@ def grade_calc(percentage):
 
 print(grade_calc(79))
 
+# Equality statements
+print(5 > 3)
+print(5 >= 3)
+print(3 == 3)
+print(3 != 4)  # 3 is not equal to 4
+
+# a = 3   means a is set to 3
+# a == 3  asks is a equal to 3?
