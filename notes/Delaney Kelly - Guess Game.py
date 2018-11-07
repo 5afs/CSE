@@ -1,14 +1,16 @@
 import random
+win = False
 a = random.randint(1, 10)
 g = int(input("You have five tries. Guess a number from one to ten: "))
+guesses_left = 5
 
-for i in (1, 2, 3, 4, 5):
-    if g >= a:
+while guesses_left > 0 and not win:
+    if g == a:
+        print("You Guessed It!")
+        win = True
+    elif g >= a:
+        guesses_left -= 1
         g = int(input("Guess lower: "))
     elif g <= a:
-        print("Guess higher: ")
+        guesses_left -= 1
         g = int(input("Guess higher: "))
-    elif g == a:
-        print("You guessed it!")
-    elif i == 5:
-        print("You lost :( ")
