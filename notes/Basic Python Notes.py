@@ -134,3 +134,31 @@ print(3 != 4)  # 3 is not equal to 4
 
 # a = 3   means a is set to 3
 # a == 3  asks is a equal to 3?
+
+# Lists
+shopping_list = ["Whole Milk", "Xbox One", "PC", "Eggs"]
+print(shopping_list)  # prints whole list
+print(shopping_list[0])  # prints first one
+print("The second thing on the list is %s" % shopping_list[1])
+print("The length of the list is %d" % len(shopping_list))
+
+# Changing Elements in a List
+shopping_list[1] = "2% Milk"
+print(shopping_list)
+print(shopping_list[0])
+
+# Looping Through Lists
+for item in shopping_list:
+    print(item)
+
+christmas_list = ["Roller Skates", "Bike", "Toy Train", "Doll", "New Computer"]
+christmas_list[2] = "Yo Yo"
+print(christmas_list[2])
+print(christmas_list)
+print("The last thing in the list is %s" % christmas_list[len(christmas_list) - 1])
+
+# Getting Part of a List
+print(christmas_list[1:3])  # prints second and third item
+print(christmas_list[1:4])  # prints second, third, and fourth item
+print(christmas_list[1:])  # prints from second item to end
+
