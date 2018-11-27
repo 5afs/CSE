@@ -1,9 +1,6 @@
 '''
 print("Hello World!")
 print()
-This is a comment. I can write whatever I want
-here and it won't do anything about it.
-It has no effect on the code.
 print()  # this adds extra spaces in the terminal
 print("This will print here. Notice the spacing.")
 
@@ -47,12 +44,10 @@ real_age = int(input("how old are you? >_"))
 hidden_age = real_age + 5
 print(hidden_age)
 print("%d is incredibly old. You are actually %d years old" % (hidden_age, real_age))
-'''
 
-'''
 This is a multi-line comment
 I can type anywhere here
-'''
+
 
 
 # functions
@@ -99,11 +94,11 @@ while a < 10:
     print(a)
     a += 1  # This is the same thing as a = a + 1
 
-'''
+
 Hints with loops:
 For loops - Use when you know EXACTLY how many iterations
 While loops - Use when you DON'T know how may iterations
-'''
+
 
 # Random numbers
 import random  # This should always be on line 1
@@ -134,6 +129,7 @@ print(3 != 4)  # 3 is not equal to 4
 
 # a = 3   means a is set to 3
 # a == 3  asks is a equal to 3?
+'''
 
 # Lists
 shopping_list = ["Whole Milk", "Xbox One", "PC", "Eggs"]
@@ -162,3 +158,50 @@ print(christmas_list[1:3])  # prints second and third item
 print(christmas_list[1:4])  # prints second, third, and fourth item
 print(christmas_list[1:])  # prints from second item to end
 
+# Adding Things to a List
+holiday_list = []
+holiday_list.append("Tacos")
+holiday_list.append("Bumblebee")
+holiday_list.append("Red Dead Redemption 2")
+print(holiday_list)
+# Notice this is "object.method(Parameters)"
+
+# Removing Things From a List
+holiday_list.remove("Tacos")
+print(holiday_list)
+
+shop_list = ["eggs", "bread", "butter"]
+shop_list.append("flour")
+shop_list.remove("butter")
+print(shop_list)
+
+# ALSO Removing Things From a List
+print(holiday_list)
+holiday_list.pop(0)  # Removes the Item at Index 0
+print(holiday_list)
+
+# Tuple
+brands = ("Apple", "Samsung", "HTC")  # Notice the Parenthesis
+
+
+colors = ["red", "orange", "yellow", "green", "blue", "indigo", "purple", "teal", "white", "black", "gold", "rust",
+          "magenta", "scarlet", "tan", "brown", "pink", "indigo"]
+print(len(colors))
+
+# Finding the Index
+print(colors.index("gold"))
+
+# Changing Things into a List
+string1 = "turquoise"
+list1 = list(string1)
+print(list1)
+
+for character in list1:
+    if character == "u":
+        # replace with a *
+        current_index = list1.index(character)
+        list1.pop(current_index)
+        list1.insert(current_index, "*")
+
+# Changing Lists into Strings
+print("".join(list1))       
