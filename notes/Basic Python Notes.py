@@ -204,4 +204,4 @@ for character in list1:
         list1.insert(current_index, "*")
 
 # Changing Lists into Strings
-print("".join(list1))       
+print("".join(list1))
