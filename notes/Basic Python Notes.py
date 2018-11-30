@@ -205,3 +205,4 @@ for character in list1:
 
 # Changing Lists into Strings
 print("".join(list1))
+print(len(colors))
