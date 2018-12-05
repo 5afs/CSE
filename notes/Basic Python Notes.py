@@ -206,3 +206,12 @@ for character in list1:
 # Changing Lists into Strings
 print("".join(list1))
 print(len(colors))
+
+# Function Practice
+# a**2 + b**2 = c**2
+
+def pythagorean(a, b):
+    return (a**2 + b**2)**(1/2)
+
+
+print(pythagorean(3, 4))
