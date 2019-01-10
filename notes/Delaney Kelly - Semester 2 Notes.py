@@ -15,3 +15,6 @@ colors.append("teal")
 print(colors)
 colors.pop(0)
 print(colors)
+print(len(colors))
+print(colors[1])
+

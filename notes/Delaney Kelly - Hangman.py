@@ -1,23 +1,27 @@
 import random
-words = ["spinx", "dwarf", "bagpipes", "banjo", "pixel", "unzip", "zigzag", "oxygen", "mystify", "hyphen"]
+words = ["shouldn't", "dwarf", "elephant", "banjo", "pixel", "unzip", "don't", "green", "mystery", "bagpipes", "water"]
 
 answer_word = random.choice(words)
+
 answer_letters = list(answer_word)
 blank_answer = []
+mistakes = 8
 
 for item in answer_letters:
-        # Make *s for letters in a new list
-        current_index = answer_letters.index(item)
-        blank_answer.insert(current_index, "*")
+    # Make _s for letters in a new list
+    current_index = answer_letters.index(item)
+    blank_answer.insert(current_index, "_ ")
 
+print("The answer is %d letters long" % len(answer_letters))
+print("".join(blank_answer))  # print a joined list
 
-print("The word is %d letters long" % len(answer_letters))
-guess = input("Guess a letter: ")
-
-
+while mistakes > 0:
+    guess = input("Guess a letter: ")  # should go in the loop
+    # if guess == character in answer_letters:
 
 
 '''
+you get 8 guesses
 if guess == answer_letters:
 
 for character in answer_letters:
