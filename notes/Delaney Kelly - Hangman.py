@@ -18,25 +18,37 @@ if "'" in answer_letters:
 
 print('The answer is %d letters long' % len(answer_letters))
 print("".join(blank_answer))  # print a joined list
+guess = ""
 
 while mistakes > 0:  # actually playing the game
+    # Build blank_answer
+    guessed_letters.append(guess)
+    # Take input
+    if blank_answer == answer_letters:  # won
+        mistakes = 0
+        print("Yay!, you won")
+    elif mistakes == 0 and guess != answer_letters:  # lost
+        print("You lost! ")  # switch won and lost?
     guess = input("Guess a letter: ")  # should go in the loop
-    if guess in answer_letters:
-        mistakes -= 1
+    if guess in answer_letters and guess not in guessed_letters:
         guessed_letters.append(guess)
         blank_answer[answer_letters.index(guess)] = guess
         print("".join(blank_answer))
-    elif guess in guessed_letters:
-        print("You have already guessed this letter. ")
-    elif guess not in answer_letters:
-        print("Sorry, that letter is not in the word.")
-        mistakes += 1
 
-if mistakes == 0 and guess != answer_letters:
-    print("You lost! ")
-
+    elif guess not in answer_letters and guess not in guessed_letters:  # haven't guessed, not correct
+        guessed_letters.append(guess)
+        print("That letter is not in the word.")
+    elif guess in guessed_letters:  # already guessed
+        print("You have already guessed this letter.")
 
 '''
+
+    elif blank_answer == answer_letters:  # won
+        mistakes = 0
+        print("Yay! You won!")
+        
+    
+
 you get 8 guesses
 if guess == answer_letters:
 
