@@ -2,8 +2,7 @@ import random
 words = ["shouldn't", "dwarf", "elephant", "banjo", "pixel", "unzip", "don't", "green", "mystery",
          "bagpipes", "water"]
 
-# answer_word = random.choice(words)
-answer_word = 'pizza'  # DELETE this later
+answer_word = random.choice(words)
 answer_letters = list(answer_word)
 blank_answer = []
 guessed_letters = []
@@ -25,6 +24,7 @@ while mistakes > 0:  # actually playing the game
     if blank_answer == answer_letters:  # won
         mistakes = 0
         print("Yay!, you won")
+        continue
 
     guess = input("Guess a letter: ")  # should go in the loop
 
@@ -40,16 +40,9 @@ while mistakes > 0:  # actually playing the game
         print("You have already guessed this letter.")
 
     elif guess not in answer_letters and guess not in guessed_letters:  # haven't guessed before, not correct
-            if mistakes == 0 and blank_answer != answer_letters:  # lost
-                print("You lost! The answer was: %s" % answer_word)
-            else:
-                guessed_letters.append(guess)
-                mistakes -= 1
-                print("That letter is not in the word.")
+        guessed_letters.append(guess)
+        mistakes -= 1
+        print("That letter is not in the word.")
 
-
-
-'''
-    Build blank_answer
-    Take input
-'''
+if mistakes == 0 and blank_answer != answer_letters:
+    print("You lost! The answer was: %s" % answer_word)
