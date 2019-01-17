@@ -42,7 +42,7 @@ while mistakes > 0:  # actually playing the game
     elif guess not in answer_letters and guess not in guessed_letters:  # haven't guessed before, not correct
         guessed_letters.append(guess)
         mistakes -= 1
-        print("That letter is not in the word.")
+        print("That letter is not in the word. You have %s wrong guesses left." % mistakes)
 
 if mistakes == 0 and blank_answer != answer_letters:
     print("You lost! The answer was: %s" % answer_word)
