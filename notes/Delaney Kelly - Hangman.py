@@ -27,6 +27,8 @@ while mistakes > 0:  # actually playing the game
         continue
 
     guess = input("Guess a letter: ")  # should go in the loop
+    if guess == guess.upper():
+        guess = guess.lower()
 
     if guess in answer_letters and guess not in guessed_letters:
         guessed_letters.append(guess)
@@ -38,11 +40,13 @@ while mistakes > 0:  # actually playing the game
 
     elif guess in guessed_letters:  # already guessed
         print("You have already guessed this letter.")
+        print("".join(blank_answer))
 
     elif guess not in answer_letters and guess not in guessed_letters:  # haven't guessed before, not correct
         guessed_letters.append(guess)
         mistakes -= 1
         print("That letter is not in the word. You have %s wrong guesses left." % mistakes)
+        print("".join(blank_answer))
 
 if mistakes == 0 and blank_answer != answer_letters:
     print("You lost! The answer was: %s" % answer_word)
