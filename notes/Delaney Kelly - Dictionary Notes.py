@@ -84,3 +84,23 @@ complex_dictionary = {
 }
 
 print(complex_dictionary["RI"]["CITIES"][2])
+print(complex_dictionary["VA"]["NAME"])
+print(complex_dictionary["MD"]["CITIES"][0])
+
+print(complex_dictionary.keys())  # .keys gives you a list of all the keys in a dictionary
+print(nested_dictionary.items())  # .items gives you the entire dictionary
+
+print()
+for key, value in complex_dictionary.items():
+    print(key)
+    print(value)
+    print("-" * 20)
+
+for state, facts in complex_dictionary.items():  # can call "state, facts" anything you want
+    for attr, value in facts.items():
+        print(attr)
+        print(value)
+        print("-" * 20)
+    print("=" * 20)
+
+
