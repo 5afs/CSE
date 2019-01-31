@@ -14,3 +14,25 @@ world_map = {
         }
     }
 }
+
+# Other Variables
+current_node = world_map['R19A']  # starting room
+directions = ["NORTH", "EAST", "SOUTH", "WEST", "UP", "DOWN"]
+playing = True
+
+# Controller
+while playing:
+    print(current_node["NAME"])
+    command = input(">_")
+    if command.lower() in ['q', 'quit' 'exit']:
+        playing = False
+        continue
+    elif command.upper() in directions:
+        try:
+            room_name = current_node['PATHS'][command.upper()]
+            current_node = world_map[room_name]
+        except KeyError:
+            print("You can't go that way.")
+
+    else:
+        print("Command Not Recognized")
