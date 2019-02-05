@@ -103,4 +103,12 @@ for state, facts in complex_dictionary.items():  # can call "state, facts" anyth
         print("-" * 20)
     print("=" * 20)
 
+# Other notes
 
+# Adding to a dictionary
+
+states['AL'] = "Alaska?"
+
+# Changing a dictionary value
+
+states['AL'] = "Alabama"
