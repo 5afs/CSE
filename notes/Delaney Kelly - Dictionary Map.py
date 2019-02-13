@@ -94,7 +94,9 @@ world_map = {
     },
     'UNDER_BRIDGE': {
         'NAME': "Under the Bridge",
-        'DESCRIPTION': " ",
+        'DESCRIPTION': "You are underneath a brick bridge. To the North, it is dark and you can see a little bit of"
+                       "glowing light. To the other side, there is a little more light coming in. To the Southeast you"
+                       "can hear water falling. To the southwest, you can see some trees. ",
         'PATHS': {
             'NORTH': 'ALLEY',
             'SOUTHEAST': 'FOUNTAIN',
@@ -103,7 +105,10 @@ world_map = {
     },
     'LEMONADE_STAND': {
         'NAME': "The Lemonade Stand",
-        'DESCRIPTION': " ",
+        'DESCRIPTION': "There is a little kids' lemonade stand with a pitcher of iced lemonade and a pile of empty "
+                       "cups. Also on the table is a sign that says 'sorry! we are closed. come back later. Behind"
+                       "the sign is a glass jar filed with money. You can't see anyone around you. To the south is the"
+                       "gate to the zoo. To the West is the East Park Gate. ",
         'PATHS': {
             'SOUTH': 'ZOO_GATE',
             'WEST': 'GATE_2'
@@ -111,7 +116,9 @@ world_map = {
     },
     'WELL': {
         'NAME': "A Well",
-        'DESCRIPTION': " ",
+        'DESCRIPTION': "You are in a small clearing. In the middle of the clearing is a well. There is a rope going"
+                       "into it and there is a bucket on the end. To the north, the path leads into the forest and to"
+                       "the East is another trail. ",
         'PATHS': {
             'NORTH': 'FOREST',
             'EAST': 'CLEARING'
@@ -119,7 +126,8 @@ world_map = {
     },
     'CLEARING': {
         'NAME': "A clearing",
-        'DESCRIPTION': " ",
+        'DESCRIPTION': "You are in the middle of a clearing. There is an old no. 2 pencil on the ground. The trail"
+                       "leads into the forest to the north and the south. ",
         'PATHS': {
             'NORTH': 'WELL',
             'SOUTH': 'GATE_3'
@@ -127,14 +135,17 @@ world_map = {
     },
     'BENCHES': {
         'NAME': "The picnic area",
-        'DESCRIPTION': " ",
+        'DESCRIPTION': "You are in the middle of a group of picnic benches. There is a sleeping park guard on one of"
+                       "the benches. You can see his key ring on the bench behind him. To the north is a fountain. ",
         'PATHS': {
             'NORTH': 'FOUNTAIN'
         }
     },
     'FOUNTAIN': {
         'NAME': "The Fountain",
-        'DESCRIPTION': " ",
+        'DESCRIPTION': "You are next to a fountain that is shooting water into a pool. There are hundreds of coins "
+                       "scattered in it. To the Northeast is the East Park Gate. To the South is a group of picnic"
+                       "benches. To the Northwest is an area under the bridge. ",
         'PATHS': {
             'NORTHEAST': 'GATE_2',
             'SOUTH': 'BENCHES',
@@ -143,7 +154,9 @@ world_map = {
     },
     'DUMP_GATE': {
         'NAME': "The First Dump Gate",
-        'DESCRIPTION': " ",
+        'DESCRIPTION': "You are in front of a locked gate with a sign that reads 'City Dump: Gate 1'. Inside the gate,"
+                       "to the South, you can see an office. To the North is the West Park Gate and to the East is"
+                       "the South Park Gate. ",
         'PATHS': {
             'NORTH': 'GATE_1',
             'EAST': 'GATE_3',
@@ -152,7 +165,9 @@ world_map = {
     },
     'DUMP_GATE_2': {
         'NAME': "The Second Dump Gate",
-        'DESCRIPTION': " ",
+        'DESCRIPTION': "You are standing in front of a locked gate that says 'City Dump: Gate 2'. To the South, inside"
+                       "the gate, there is an empty office. To the East is the Zoo Gate. To the West is the South Park"
+                       "Gate. ",
         'PATHS': {
             'EAST': 'ZOO_GATE',
             'SOUTH': 'OFFICE_2',
@@ -161,7 +176,9 @@ world_map = {
     },
     'OFFICE': {
         'NAME': "The dump's office",
-        'DESCRIPTION': " ",
+        'DESCRIPTION': "You are in the main dump office. There are piles of paper scattered on all the desks. You see"
+                       "a big cup of new yellow pencils. To the North is the main dump gate. To the East is a dense"
+                       "pile of trash that you can't get through bu to the South is a gap that you can fit through. ",
         'PATHS': {
             'NORTH': 'DUMP_GATE',
             'EAST': 'TRASH_PILES',
@@ -170,7 +187,9 @@ world_map = {
     },
     'OFFICE_2': {
         'NAME': "An office",
-        'DESCRIPTION': " ",
+        'DESCRIPTION': "You are in a small office. It is empty and there are no office supplies. It looks deserted."
+                       "TO teh North is the Second Dump Gate. To the West are piles of trash that you won't be able to"
+                       "walk through, but to the South is a narrow path between the piles of trash. ",
         'PATHS': {
             'NORTH': 'DUMP_GATE_2',
             'SOUTH': 'PATH_THROUGH_TRASH',
@@ -179,7 +198,9 @@ world_map = {
     },
     'PILE_OF_TRASH': {
         'NAME': "The Middle of Many Piles of Trash",
-        'DESCRIPTION': " ",
+        'DESCRIPTION': "You are in the middle of heaps of garbage. You can barely walk through them but to the East"
+                       "is the main office and to the West is another, smaller, office. The doors to both offices are"
+                       "unlocked. ",
         'PATHS': {
             'EAST': 'OFFICE',
             'WEST': 'OFFICE_2'
@@ -187,7 +208,9 @@ world_map = {
     },
     'ZOO_GATE': {
         'NAME': "The Gate to the Zoo",
-        'DESCRIPTION': " ",
+        'DESCRIPTION': "You are at the zoo gate. To the North is the Lemonade stand and to the Northwest is the South"
+                       "Park Gate. To the South and the Southwest you can walk around a large monkey cage. To the"
+                       "West is a gate to the city dump. ",
         'PATHS': {
             'NORTH': 'LEMONADE_STAND',
             'NORTHWEST': 'GATE_2',
@@ -198,7 +221,8 @@ world_map = {
     },
     'WEST_OF_CAGE': {
         'NAME': "West of the Monkey Cage",
-        'DESCRIPTION': " ",
+        'DESCRIPTION': "You are on the West side of hte monkey cage. To the Northeast is the gate to the zoo and to the"
+                       "South is the front of the cage. ",
         'PATHS': {
             'NORTHEAST': 'ZOO_GATE',
             'SOUTH': 'FRONT_OF_CAGE'
@@ -206,7 +230,8 @@ world_map = {
     },
     'EAST_OF_CAGE': {
         'NAME': "East of the Monkey Cage",
-        'DESCRIPTION': " ",
+        'DESCRIPTION': "You are on the East side of hte monkey cage. To the North is the gate to the zoo and to the"
+                       "West is the front of the cage. ",
         'PATHS': {
             'NORTH': 'ZOO_GATE',
             'WEST': 'FRONT_OF_CAGE'
@@ -214,7 +239,8 @@ world_map = {
     },
     'FRONT_OF_CAGE': {
         'NAME': "In Front of the Monkey Cage",
-        'DESCRIPTION': " ",
+        'DESCRIPTION': "You are in front of the monkey cage. Catherine is here. To the North is the west side of the"
+                       "monkey cage and to the East is the East side of hte cage. ",
         'PATHS': {
             'NORTH': 'WEST_OF_CAGE',
             'EAST': 'EAST_OF_CAGE'
@@ -222,7 +248,8 @@ world_map = {
     },
     'DUMPSTERS': {
         'NAME': "A Side Alley",
-        'DESCRIPTION': " ",
+        'DESCRIPTION': "You are in a small side alley. There is an open dumpster in front of you. To the East and the"
+                       "West are doors. ",
         'PATHS': {
             'EAST': 'OFFICE_STORE',
             'WEST': 'STATIONARY_STORE'
@@ -230,7 +257,8 @@ world_map = {
     },
     'DUMPSTERS_2': {
         'NAME': "A Side Alley",
-        'DESCRIPTION': " ",
+        'DESCRIPTION': "You are in a small side alley. There is an open dumpster in front of you. To the East and the"
+                       "West are doors. ",
         'PATHS': {
             'EAST': 'CANDY_STORE',
             'WEST': 'OFFICE_STORE'
@@ -240,8 +268,8 @@ world_map = {
 
 
 # Other Variables
-current_node = world_map['R19A']  # starting room
-directions = ["NORTH", "EAST", "SOUTH", "WEST", "UP", "DOWN"]
+current_node = world_map['UNDER_BRIDGE']  # starting room
+directions = ["NORTH", "EAST", "SOUTH", "WEST", "NORTHEAST", "NORTHWEST", "SOUTHEAST", "SOUTHWEST"]
 playing = True
 
 # Controller
