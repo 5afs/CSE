@@ -40,7 +40,3 @@ my_water_gun.pump_it_up()
 my_water_gun.shoot(1)
 
 print(Special_Random.RandomWiebe.special_random())
-
-
-class Camera(object):
-    def__init__()
