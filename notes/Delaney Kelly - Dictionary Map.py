@@ -178,7 +178,7 @@ world_map = {
         'NAME': "The dump's office",
         'DESCRIPTION': "You are in the main dump office. There are piles of paper scattered on all the desks. You see"
                        "a big cup of new yellow pencils. To the North is the main dump gate. To the East is a dense"
-                       "pile of trash that you can't get through bu to the South is a gap that you can fit through. ",
+                       "pile of trash that you can't get through but to the South is a gap that you can fit through. ",
         'PATHS': {
             'NORTH': 'DUMP_GATE',
             'EAST': 'TRASH_PILES',
@@ -256,7 +256,7 @@ world_map = {
         }
     },
     'DUMPSTERS_2': {
-        'NAME': "A Side Alley",
+        'NAME': "Another Side Alley",
         'DESCRIPTION': "You are in a small side alley. There is an open dumpster in front of you. To the East and the"
                        "West are doors. ",
         'PATHS': {
