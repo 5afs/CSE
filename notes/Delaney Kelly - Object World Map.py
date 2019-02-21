@@ -1,5 +1,6 @@
 class Room(object):
-    def __init__(self, name, north, east, south, west, northeast, northwest, southeast, southwest, description):
+    def __init__(self, name, north, east, south, west, northeast, northwest, southeast, southwest, description,
+                 characters=None):
         self.name = name
         self.north = north
         self.east = east
@@ -10,6 +11,7 @@ class Room(object):
         self.southeast = southeast
         self.southwest = southwest
         self.description = description
+        self.characters = characters
 
 
 class Character(object):
@@ -20,11 +22,10 @@ class Character(object):
 
 
 #  Characters
-self = Character("You", "bridge", None)
+player = Character("You", "bridge", None)
 catherine = Character("Catherine", "front_of_cage", None)
 trash_guy = Character("A man", "pile_of_trash", "He is dressed in baggy clothes and riding a bicycle. In his bike "
                                                 "basket is a bundle of no. 2 pencils.")
-
 
 
 #  Rooms
@@ -174,3 +175,24 @@ dumpsters_2 = Room("Another Side Alley",
                    None, "candy_store", None, "office_store", None, None, None, None,
                    "You are in a small side alley. There is an open dumpster in front of you. To the East and the"
                    "West are doors. ")
+
+player.location = bridge
+playing = True
+directions = ["NORTH", "EAST", "SOUTH", "WEST", "NORTHEAST", "NORTHWEST", "SOUTHEAST", "SOUTHWEST",
+              "N", "E", "S", "W", "NE", "NW", "SE", "SW"]
+
+while playing:
+    command = input(">_")
+    if command.lower() in ['q', 'quit', 'exit']:
+        print("Game Over!")
+        quit(0)
+    print(globals()['alley'])  # Becomes the variable alley
+    elif command.upper() in directions:
+        try:
+            room_name = player.location['PATHS'][command.upper()]
+            player.location = Room.name
+        except KeyError:
+            print("You can't go that way.")
+
+    else:
+        print("Command Not Recognized")
