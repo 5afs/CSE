@@ -19,12 +19,36 @@ class Room(object):
         self.visits = visits
 
 
+class Gate(Room):
+    def __init__(self, name, north, east, south, west, northeast, northwest, southeast, southwest, description,
+                 description_unlocked, characters=None, objects=None, visits=0, locked=True):
+        super(Gate, self).__init__(name, north, east, south, west, northeast, northwest, southeast, southwest,
+                                   description, characters, objects, visits)
+        self.name = name
+        self.north = north
+        self.east = east
+        self.south = south
+        self.west = west
+        self.northeast = northeast
+        self.northwest = northwest
+        self.southeast = southeast
+        self.southwest = southwest
+        self.description = description
+        self.description_unlocked = description_unlocked
+        self.characters = characters
+        self.objects = objects
+        self.visits = visits
+        self.locked = locked
+
+
 class Character(object):
-    def __init__(self, name, starting_point, description, inventory):
+    def __init__(self, name, starting_point, description, inventory=None):
+        if inventory is None:
+            inventory = []
         self.name = name
         self.location = starting_point
         self.description = description
-        self.inventory = []
+        self.inventory = inventory
 
     def move(self, new_location):
         """ this method moves a character to a new location
@@ -58,27 +82,6 @@ alley = Room("The Dark Alley",
              "The entrance to under the bridge is south, behind you. In front of you, north, is a brick \n"
              "building with a sign that reads 'Office Depot'. To the left (northwest) is a stationary store. \n"
              "To the right (northeast) is a candy store. ")
-
-gate_1 = Room("The West Park Gate",
-              "stationary_store", "bridge", "dump_gate", None, None, None, "forest", None,
-              "You are standing in front of a big iron gate. It is locked but through the bars you can see \n"
-              "inside the park. To the East is a Bridge. To the Southeast is a dark forest and you can barely \n"
-              "see a narrow dirt trail going into it. To the North is the Stationary Store. To the South is \n"
-              "the main gate to the city dump. ")
-
-gate_2 = Room("The East Park Gate",
-              "candy_store", "lemonade_stand", None, "bridge", None, None, "zoo_gate", "fountain",
-              "You are standing in front of a locked iron gate that leads to the park. In the park, to the \n"
-              "West is a bridge and to the Southwest is a circular fountain that is shooting water into a \n"
-              "large tile pool. To the North, not in the park, is the Sweet Tooth Candy Store. To the East \n"
-              "is a lemonade stand. To the Southeast is the gate to the zoo. ")
-
-gate_3 = Room("The South Park Gate",
-              "clearing", "dump_gate_2", None, "dump_gate", None, None, None, None,
-              "You are standing in front of an open gate that leads into and out of the park. To the North is a \n"
-              "thick forest but you can barely see a narrow path leading into it. To the West \n"
-              "is is the main gate to the dump. You can see that it is locked. To the East is the second \n"
-              "dump gate. ")
 
 bridge = Room("The Bridge",
               None, "gate_2", None, "gate_1", None, None, None, None,
@@ -122,18 +125,6 @@ fountain = Room("The Fountain",
                 "scattered in it. To the Northeast is the East Park Gate. To the South is a group of picnic \n"
                 "benches. To the Northwest is an area under the bridge. ")
 
-dump_gate = Room("The First Dump Gate",
-                 "gate_1", "gate_3", "office", None, None, None, None, None,
-                 "You are in front of a locked gate with a sign that reads 'City Dump: Gate 1'. Inside the gate, \n"
-                 "to the South, you can see an office. To the North is the West Park Gate and to the East is \n"
-                 "the South Park Gate. ")
-
-dump_gate_2 = ("The Second Dump Gate",
-               None, "zoo_gate", "office_2", "gate_3", None, None, None, None,
-               "You are standing in front of a locked gate that says 'City Dump: Gate 2'. To the South, inside \n"
-               "the gate, there is an empty office. To the East is the Zoo Gate. To the West is the South Park \n"
-               "Gate. ")
-
 office = Room("The Dump's Office",
               "dump_gate", "trash_piles", "path_through_trash", None, None, None, None, None,
               "You are in the main dump office. There are piles of paper scattered on all the desks. You see \n"
@@ -151,12 +142,6 @@ pile_of_trash = Room("The Middle of Many Piles of Trash",
                      "You are in the middle of heaps of garbage. You can barely walk through them but to the East \n"
                      "is the main office and to the West is another, smaller, office. The doors to both offices are \n"
                      "unlocked. ")
-
-zoo_gate = Room("The Gate to the Zoo",
-                "lemonade_stand", None, "east_of_cage", "dump_gate_2", None, "gate_2", None, "west_of_cage",
-                "You are at the zoo gate. To the North is the Lemonade stand and to the Northwest is the South \n"
-                "Park Gate. To the South and the Southwest you can walk around a large monkey cage. To the \n"
-                "West is a gate to the city dump. ")
 
 west_of_cage = Room("West of the Monkey Cage",
                     None, None, "front_of_cage", None, "zoo_gate", None, None, None,
@@ -181,6 +166,73 @@ dumpsters_2 = Room("Another Side Alley",
                    None, "candy_store", None, "office_store", None, None, None, None,
                    "You are in a small side alley. There is an open dumpster in front of you. To the East and the \n"
                    "West are doors. ")
+
+# Gates
+gate_1 = Gate("The West Park Gate",
+              "stationary_store", "bridge", "dump_gate", None, None, None, "forest", None,
+              "You are standing in front of a big iron gate. It is locked but through the bars you can see \n"
+              "outside the park. To the North is the Stationary Store. To the South is \n"
+              "the main gate to the city dump. Inside the park, to the East is a Bridge. To the Southeast is a dark \n"
+              "forest and you can barely see a narrow dirt trail going into it. ",
+
+              "You are standing in a big, unlocked, iron gate open to the park. To the South is \n"
+              "the main gate to the city dump. Inside the park, to the East is a Bridge. To the Southeast is a dark \n"
+              "forest and you can barely see a narrow dirt trail going into it.",
+              None, None, 0, True)
+
+gate_2 = Gate("The East Park Gate",
+              "candy_store", "lemonade_stand", None, "bridge", None, None, "zoo_gate", "fountain",
+              "You are standing in front of a locked iron gate that leads to the park. In the park, to the \n"
+              "West is a bridge and to the Southwest is a circular fountain that is shooting water into a \n"
+              "large tile pool. To the North, not in the park, is the Sweet Tooth Candy Store. To the East \n"
+              "is a lemonade stand. To the Southeast is the gate to the zoo. ",
+
+              "You are standing in an open iron gate that leads to the park. In the park, to the \n"
+              "West is a bridge and to the Southwest is a circular fountain that is shooting water into a \n"
+              "large tile pool. To the North, not in the park, is the Sweet Tooth Candy Store. To the East \n"
+              "is a lemonade stand. To the Southeast is the gate to the zoo.",
+              None, None, 0, True)
+
+gate_3 = Gate("The South Park Gate",
+              "clearing", "dump_gate_2", None, "dump_gate", None, None, None, None,
+              "You are standing in front of a locked gate that leads into and out of the park. To the North is a \n"
+              "thick forest but you can barely see a narrow path leading into it. To the West \n"
+              "is is the main gate to the dump. You can see that it is unlocked. To the East is the second \n"
+              "dump gate. ",
+
+              "You are standing in front of an open gate that leads into and out of the park. To the North is a \n"
+              "thick forest but you can barely see a narrow path leading into it. To the West \n"
+              "is is the main gate to the dump. You can see that it is locked. To the East is the second \n"
+              "dump gate. ", None, None, 0, False)
+
+dump_gate = Gate("The First Dump Gate",
+                 "gate_1", "gate_3", "office", None, None, None, None, None,
+                 "You are in front of a locked gate with a sign that reads 'City Dump: Gate 1'. Inside the gate, \n"
+                 "to the South, you can see an office. To the North is the West Park Gate and to the East is \n"
+                 "the South Park Gate. ",
+
+                 "You are in front of an unlocked gate with a sign that reads 'City Dump: Gate 1'. Inside the gate, \n"
+                 "to the South, you can see an office. To the North is the West Park Gate and to the East is \n"
+                 "the South Park Gate. ",
+                 None, None, 0, False)
+
+dump_gate_2 = Gate("The Second Dump Gate",
+                   None, "zoo_gate", "office_2", "gate_3", None, None, None, None,
+                   "You are standing in front of a locked gate that says 'City Dump: Gate 2'. To the South, inside \n"
+                   "the gate, there is an empty office. To the East is the Zoo Gate. To the West is the South Park \n"
+                   "Gate. ",
+
+                   "You are standing in front of an unlocked gate that says 'City Dump: Gate 2'. To the South, \n"
+                   "inside the gate, there is an empty office. To the East is the Zoo Gate. To the West is the South \n"
+                   "Park Gate.",
+                   None, None, 0, True)
+
+zoo_gate = Gate("The Gate to the Zoo",
+                "lemonade_stand", None, "east_of_cage", "dump_gate_2", None, "gate_2", None, "west_of_cage",
+                "",
+                "You are at the zoo gate. To the North is the Lemonade stand and to the Northwest is the South \n"
+                "Park Gate. To the South and the Southwest you can walk around a large monkey cage. To the \n"
+                "West is a gate to the city dump. ", None, None, 0, False)
 
 
 class Item(object):
@@ -263,10 +315,10 @@ player.location = fountain
 playing = True
 directions = ["north", "east", "south", "west", "northeast", "northwest", "southeast", "southwest"]
 
-
 while playing:
     player.location.visits += 1
 
+    
     if player.location.visits < 2:  # only printing location description if they've not been there twice before
         print(player.location.name)
         print(player.location.description)
