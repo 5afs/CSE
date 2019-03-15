@@ -3,7 +3,9 @@
 
 class Room(object):
     def __init__(self, name, north, east, south, west, northeast, northwest, southeast, southwest, description,
-                 characters=None, objects=None, visits=0):
+                 objects=None, characters=None, visits=0):
+        if objects is None:
+            objects = []
         self.name = name
         self.north = north
         self.east = east
@@ -279,11 +281,11 @@ class Coupon(Item):
 
 # delete this later - add object to room description, if character picks it up, take out of room description
 
-park_keyring = Key("A keyring", under_bridge, "can be used to unlock the park gates.")
-dump_keyring = Key("Keys to the dump", dumpsters_2, "can be used to unlock the dump gates.")
-zoo_key = Key("Key to the zoo", dumpsters, "can unlock the zoo gate.")
-mechanical_pencil = Pencil("A mechanical pencil", stationary_store, "it is plastic and has an eraser", 5)
-number_2_pencil = Pencil("A Number 2 Pencil", stationary_store, "A thin, yellow, sharpened pencil with a pink eraser "
+park_keyring = Key("park keyring", benches, "can be used to unlock the park gates.")
+dump_key = Key("dump key", dumpsters_2, "can be used to unlock the dump gates.")
+zoo_key = Key("zoo key", dumpsters, "can unlock the zoo gate.")
+mechanical_pencil = Pencil("mechanical pencil", stationary_store, "it is plastic and has an eraser", 5)
+number_2_pencil = Pencil("a number 2 pencil", stationary_store, "A thin, yellow, sharpened pencil with a pink eraser "
                                                                 "on one end.", 1)
 box_of_chocolates = FerreroRocher("A box of chocolates", candy_store, "a clear plastic box filled with twelve Ferrero "
                                                                       "Rocher candies.", 12)
@@ -317,9 +319,15 @@ directions = ["north", "east", "south", "west", "northeast", "northwest", "south
 
 while playing:
     player.location.visits += 1
+    if isinstance(player.location, Gate) and player.location.locked:
+        print(player.location.name)
+        print(player.location.description)
 
-    
-    if player.location.visits < 2:  # only printing location description if they've not been there twice before
+    elif isinstance(player.location, Gate) and not player.location.locked:
+        print(player.location.name)
+        print(player.location.description_unlocked)
+
+    elif player.location.visits < 2:  # only printing location description if they've not been there twice before
         print(player.location.name)
         print(player.location.description)
 
@@ -351,12 +359,19 @@ while playing:
         print(player.location.description)
 
     elif "pick up" or "get" in command.lower():  # get object out of command
-        command = command.replace("pick up " or "get ", "")
-        if command is not Item:
+        command = command.replace("pick up ", "")
+        print(command)
+        # Search for matching item
+        found_item = None
+        for item in item_list:
+            if item.name == command and item.location == player.location:
+                found_item = item
+        if found_item is None:
             print("There is no %s in this room" % command)
-        if command is Item:
-            player.inventory.append(command)
-            print("You have %s" % str.inventory)
+        else:
+            player.inventory.append(found_item)
+            found_item.location = player.inventory
+            print("You have %s" % found_item.name)
 
     else:
         print("Command Not Recognized")
