@@ -1,4 +1,7 @@
 #  The goal is to get a number 2 pencil, a box for Catherine to live in, and some chocolates
+print("Today is Catherine's birthday. You need to get her a number 2 pencil so she can copy your homework, a box of \n"
+      "chocolates for her to eat, and a large box for her to live in.\n"
+      "")
 
 
 class Room(object):
@@ -23,7 +26,7 @@ class Room(object):
 
 class Gate(Room):
     def __init__(self, name, north, east, south, west, northeast, northwest, southeast, southwest, description,
-                 description_unlocked, characters=None, objects=None, visits=0, locked=True):
+                 description_unlocked, unreachable, characters=None, objects=None, visits=0, locked=True):
         super(Gate, self).__init__(name, north, east, south, west, northeast, northwest, southeast, southwest,
                                    description, characters, objects, visits)
         self.name = name
@@ -37,6 +40,7 @@ class Gate(Room):
         self.southwest = southwest
         self.description = description
         self.description_unlocked = description_unlocked
+        self.unreachable = unreachable  # rooms you can't get to if the gate is locked
         self.characters = characters
         self.objects = objects
         self.visits = visits
@@ -171,28 +175,30 @@ dumpsters_2 = Room("Another Side Alley",
 
 # Gates
 gate_1 = Gate("The West Park Gate",
-              "stationary_store", "bridge", "dump_gate", None, None, None, "forest", None,
+              "alley", "bridge", "dump_gate", None, None, None, "forest", None,
               "You are standing in front of a big iron gate. It is locked but through the bars you can see \n"
-              "outside the park. To the North is the Stationary Store. To the South is \n"
+              "outside the park. To the North is the alley. To the South is \n"
               "the main gate to the city dump. Inside the park, to the East is a Bridge. To the Southeast is a dark \n"
               "forest and you can barely see a narrow dirt trail going into it. ",
 
               "You are standing in a big, unlocked, iron gate open to the park. To the South is \n"
               "the main gate to the city dump. Inside the park, to the East is a Bridge. To the Southeast is a dark \n"
               "forest and you can barely see a narrow dirt trail going into it.",
+              ["alley", "dump_gate"],
               None, None, 0, True)
 
 gate_2 = Gate("The East Park Gate",
-              "candy_store", "lemonade_stand", None, "bridge", None, None, "zoo_gate", "fountain",
+              "alley", "lemonade_stand", None, "bridge", None, None, "zoo_gate", "fountain",
               "You are standing in front of a locked iron gate that leads to the park. In the park, to the \n"
               "West is a bridge and to the Southwest is a circular fountain that is shooting water into a \n"
-              "large tile pool. To the North, not in the park, is the Sweet Tooth Candy Store. To the East \n"
+              "large tile pool. To the North, through the park gate, is an alley. To the East \n"
               "is a lemonade stand. To the Southeast is the gate to the zoo. ",
 
               "You are standing in an open iron gate that leads to the park. In the park, to the \n"
               "West is a bridge and to the Southwest is a circular fountain that is shooting water into a \n"
               "large tile pool. To the North, not in the park, is the Sweet Tooth Candy Store. To the East \n"
               "is a lemonade stand. To the Southeast is the gate to the zoo.",
+              ["alley", "lemonade_stand", "zoo_gate"],
               None, None, 0, True)
 
 gate_3 = Gate("The South Park Gate",
@@ -205,7 +211,9 @@ gate_3 = Gate("The South Park Gate",
               "You are standing in front of an open gate that leads into and out of the park. To the North is a \n"
               "thick forest but you can barely see a narrow path leading into it. To the West \n"
               "is is the main gate to the dump. You can see that it is locked. To the East is the second \n"
-              "dump gate. ", None, None, 0, False)
+              "dump gate. ",
+              ["dump_gate", "dump_gate_2"],
+              None, None, 0, False)
 
 dump_gate = Gate("The First Dump Gate",
                  "gate_1", "gate_3", "office", None, None, None, None, None,
@@ -216,6 +224,7 @@ dump_gate = Gate("The First Dump Gate",
                  "You are in front of an unlocked gate with a sign that reads 'City Dump: Gate 1'. Inside the gate, \n"
                  "to the South, you can see an office. To the North is the West Park Gate and to the East is \n"
                  "the South Park Gate. ",
+                 ["office"],
                  None, None, 0, False)
 
 dump_gate_2 = Gate("The Second Dump Gate",
@@ -227,6 +236,7 @@ dump_gate_2 = Gate("The Second Dump Gate",
                    "You are standing in front of an unlocked gate that says 'City Dump: Gate 2'. To the South, \n"
                    "inside the gate, there is an empty office. To the East is the Zoo Gate. To the West is the South \n"
                    "Park Gate.",
+                   ["office_2"],
                    None, None, 0, True)
 
 zoo_gate = Gate("The Gate to the Zoo",
@@ -234,7 +244,9 @@ zoo_gate = Gate("The Gate to the Zoo",
                 "",
                 "You are at the zoo gate. To the North is the Lemonade stand and to the Northwest is the South \n"
                 "Park Gate. To the South and the Southwest you can walk around a large monkey cage. To the \n"
-                "West is a gate to the city dump. ", None, None, 0, False)
+                "West is a gate to the city dump. ",
+                ["east_of_cage", "west_of_cage"],
+                None, None, 0, False)
 
 
 class Item(object):
@@ -301,7 +313,7 @@ candy_store_coupon = Coupon("A coupon to the candy store", office_2, "is worth t
 stationary_store_coupon = Coupon("A coupon to the stationary store", office_2, "is worth enough to get one free pencil "
                                                                                "from the stationary store.", 1)
 
-item_list = [park_keyring, dump_keyring, zoo_key, mechanical_pencil, number_2_pencil, box_of_chocolates, small_box,
+item_list = [park_keyring, dump_key, zoo_key, mechanical_pencil, number_2_pencil, box_of_chocolates, small_box,
              regular_box, big_box, penny, quarter, dollar_bill, five_dollar_bill, stationary_store_coupon,
              candy_store_coupon]
 
@@ -313,7 +325,7 @@ trash_guy = Character("A man", "pile_of_trash", "He is dressed in baggy clothes 
                                                                                          number_2_pencil,
                                                                                          number_2_pencil])
 
-player.location = fountain
+player.location = bridge
 playing = True
 directions = ["north", "east", "south", "west", "northeast", "northwest", "southeast", "southwest"]
 
@@ -322,17 +334,21 @@ while playing:
     if isinstance(player.location, Gate) and player.location.locked:
         print(player.location.name)
         print(player.location.description)
+        print()
 
     elif isinstance(player.location, Gate) and not player.location.locked:
         print(player.location.name)
         print(player.location.description_unlocked)
+        print()
 
     elif player.location.visits < 2:  # only printing location description if they've not been there twice before
         print(player.location.name)
         print(player.location.description)
+        print()
 
     else:
         print(player.location.name)
+        print()
 
     for item in item_list:  # adding item descriptions to room descriptions
         if item.location == player.location.name:
@@ -351,12 +367,18 @@ while playing:
             room_name = getattr(player.location, command)
             room_object = globals()[room_name]
 
-            player.move(room_object)
+            if room_object is not Gate:
+                player.move(room_object)
+            elif room_object is Gate and room_object.locked:
+                print("The gate is locked. You cannot go through this way.")
+
         except KeyError:
             print("You are not able to go that way.")
+            print()
 
     elif command == "look":
         print(player.location.description)
+        print()
 
     elif "pick up" or "get" in command.lower():  # get object out of command
         command = command.replace("pick up ", "")
@@ -368,6 +390,7 @@ while playing:
                 found_item = item
         if found_item is None:
             print("There is no %s in this room" % command)
+
         else:
             player.inventory.append(found_item)
             found_item.location = player.inventory
@@ -375,3 +398,4 @@ while playing:
 
     else:
         print("Command Not Recognized")
+        print()
