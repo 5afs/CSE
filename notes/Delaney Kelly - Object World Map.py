@@ -291,8 +291,6 @@ class Coupon(Item):
         self.worth = worth
 
 
-# delete this later - add object to room description, if character picks it up, take out of room description
-
 park_keyring = Key("park keyring", benches, "can be used to unlock the park gates.")
 dump_key = Key("dump key", dumpsters_2, "can be used to unlock the dump gates.")
 zoo_key = Key("zoo key", dumpsters, "can unlock the zoo gate.")
@@ -358,19 +356,22 @@ while playing:
     command = input(">_")
 
     if command.lower() in ['q', 'quit' 'exit']:  # ending game
+        print("You have ended the game.")
         playing = False
+
         continue
 
     elif command.lower() in directions:  # moving from room to room
+
         try:
             # command is 'north'
             room_name = getattr(player.location, command)
-            room_object = globals()[room_name]
+            if room_name is Gate:
+                if room_name == room_name.unreachable:
+                    print("The gate is locked. You cannot go through.")
 
-            if room_object is not Gate:
-                player.move(room_object)
-            elif room_object is Gate and room_object.locked:
-                print("The gate is locked. You cannot go through this way.")
+            room_object = globals()[room_name]
+            player.move(room_object)
 
         except KeyError:
             print("You are not able to go that way.")
@@ -386,6 +387,7 @@ while playing:
         # Search for matching item
         found_item = None
         for item in item_list:
+
             if item.name == command and item.location == player.location:
                 found_item = item
         if found_item is None:
