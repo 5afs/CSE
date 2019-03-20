@@ -1,7 +1,10 @@
-#  The goal is to get a number 2 pencil, a box for Catherine to live in, and some chocolates
 print("Today is Catherine's birthday. You need to get her a number 2 pencil so she can copy your homework, a box of \n"
       "chocolates for her to eat, and a large box for her to live in.\n"
       "")
+
+
+class LockException(Exception):
+    pass
 
 
 class Room(object):
@@ -48,13 +51,14 @@ class Gate(Room):
 
 
 class Character(object):
-    def __init__(self, name, starting_point, description, inventory=None):
+    def __init__(self, name, starting_point, description, inventory=None, wallet=0):
         if inventory is None:
             inventory = []
         self.name = name
         self.location = starting_point
         self.description = description
         self.inventory = inventory
+        self.wallet = wallet
 
     def move(self, new_location):
         """ this method moves a character to a new location
@@ -297,19 +301,19 @@ zoo_key = Key("zoo key", dumpsters, "can unlock the zoo gate.")
 mechanical_pencil = Pencil("mechanical pencil", stationary_store, "it is plastic and has an eraser", 5)
 number_2_pencil = Pencil("a number 2 pencil", stationary_store, "A thin, yellow, sharpened pencil with a pink eraser "
                                                                 "on one end.", 1)
-box_of_chocolates = FerreroRocher("A box of chocolates", candy_store, "a clear plastic box filled with twelve Ferrero "
-                                                                      "Rocher candies.", 12)
-small_box = Box("A small box", office_store, "a very small cardboard box, about the size of a shoebox", 5)
-regular_box = Box("A normal box", office_store, "a medium sized box, one side is missing", 7)
-big_box = Box("A really bog box", office_store, "a person could definitely fit inside.", 10)
-penny = Money("A copper penny", fountain, "is worth one cent.", 0.01)
-quarter = Money("A quarter", fountain, "is worth twenty-five cents.", 0.25)
-dollar_bill = Money("A dollar bill", clearing, "is worth one dollar.", 1)
-five_dollar_bill = Money("A five dollar bill", lemonade_stand, "is worth five dollars.", 5)
-candy_store_coupon = Coupon("A coupon to the candy store", office_2, "is worth two dollars in the Sweet Tooth Candy "
-                                                                     "Store.", 2)
-stationary_store_coupon = Coupon("A coupon to the stationary store", office_2, "is worth enough to get one free pencil "
-                                                                               "from the stationary store.", 1)
+box_of_chocolates = FerreroRocher("box of chocolates", candy_store, "a clear plastic box filled with twelve Ferrero "
+                                                                    "Rocher candies.", 12)
+small_box = Box("small box", office_store, "a very small cardboard box, about the size of a shoebox", 5)
+regular_box = Box("normal box", office_store, "a medium sized box, one side is missing", 7)
+big_box = Box("big box", office_store, "a person could definitely fit inside.", 10)
+penny = Money("penny", fountain, "is worth one cent.", 0.01)
+quarter = Money("quarter", fountain, "is worth twenty-five cents.", 0.25)
+dollar_bill = Money("dollar bill", clearing, "is worth one dollar.", 1)
+five_dollar_bill = Money("five dollar bill", lemonade_stand, "is worth five dollars.", 5)
+candy_store_coupon = Coupon("coupon to the candy store", office_2, "is worth two dollars in the Sweet Tooth Candy "
+                                                                   "Store.", 2)
+stationary_store_coupon = Coupon("coupon to the stationary store", office_2, "is worth enough to get one free pencil "
+                                                                             "from the stationary store.", 1)
 
 item_list = [park_keyring, dump_key, zoo_key, mechanical_pencil, number_2_pencil, box_of_chocolates, small_box,
              regular_box, big_box, penny, quarter, dollar_bill, five_dollar_bill, stationary_store_coupon,
@@ -366,15 +370,18 @@ while playing:
         try:
             # command is 'north'
             room_name = getattr(player.location, command)
-            if room_name is Gate:
-                if room_name == room_name.unreachable:
-                    print("The gate is locked. You cannot go through.")
-
             room_object = globals()[room_name]
+            if isinstance(player.location, Gate):
+                if room_name in player.location.unreachable:
+                    raise LockException
             player.move(room_object)
 
         except KeyError:
             print("You are not able to go that way.")
+            print()
+
+        except LockException:
+            print("The gate is locked. You cannot go through.")
             print()
 
     elif command == "look":
@@ -383,20 +390,27 @@ while playing:
 
     elif "pick up" or "get" in command.lower():  # get object out of command
         command = command.replace("pick up ", "")
-        print(command)
         # Search for matching item
         found_item = None
-        for item in item_list:
 
+        for item in item_list:
             if item.name == command and item.location == player.location:
                 found_item = item
+
         if found_item is None:
             print("There is no %s in this room" % command)
+
+        elif isinstance(found_item, Money):
+            player.inventory.append(found_item)
+            player.wallet += found_item.worth
+            found_item.location = player.inventory
+            print("You have %s" % found_item.name)
+            print("You have $%d." % player.wallet)
 
         else:
             player.inventory.append(found_item)
             found_item.location = player.inventory
-            print("You have %s" % found_item.name)
+            print("You have a %s" % found_item.name)
 
     else:
         print("Command Not Recognized")
