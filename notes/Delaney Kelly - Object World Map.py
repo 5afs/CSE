@@ -1,3 +1,5 @@
+import random
+
 print("Today is Catherine's birthday. You need to get her a number 2 pencil so she can copy your homework, a box of \n"
       "chocolates for her to eat, and a large box for her to live in.\n"
       "")
@@ -51,7 +53,7 @@ class Gate(Room):
 
 
 class Character(object):
-    def __init__(self, name, starting_point, description, inventory=None, wallet=0):
+    def __init__(self, name, starting_point, description, inventory=None, wallet=float(0)):
         if inventory is None:
             inventory = []
         self.name = name
@@ -127,7 +129,7 @@ clearing = Room("A Clearing",
 benches = Room("The Picnic Area",
                "fountain", None, None, None, None, None, None, None,
                "You are in the middle of a group of picnic benches. There is a sleeping park guard on one of \n"
-               "the benches. You can see his key ring on the bench behind him. To the north is a fountain. ")
+               "the benches. You can see his keyring on the bench behind him. To the north is a fountain. ")
 
 fountain = Room("The Fountain",
                 None, None, "benches", None, "gate_2", "under_bridge", None, None,
@@ -254,58 +256,61 @@ zoo_gate = Gate("The Gate to the Zoo",
 
 
 class Item(object):
-    def __init__(self, name, location, description):
+    def __init__(self, name, location, description, long_name):
         self.name = name
         self.location = location
         self.description = description
+        self.long_name = long_name
 
 
 class Key(Item):
-    def __init__(self, name, location, description):
-        super(Key, self).__init__(name, location, description)
+    def __init__(self, name, location, description, unlocks, long_name):
+        super(Key, self).__init__(name, location, description, long_name)
+        self.unlocks = unlocks
 
 
 class FerreroRocher(Item):
-    def __init__(self, name, location, description, price):
-        super(FerreroRocher, self).__init__(name, location, description)
+    def __init__(self, name, location, description, price, long_name):
+        super(FerreroRocher, self).__init__(name, location, description, long_name)
         self.price = price
 
 
 class Pencil(Item):
     def __init__(self, name, location, description, price):
-        super(Pencil, self).__init__(name, location, description)
+        super(Pencil, self).__init__(name, location, description, long_name)
         self.price = price
 
 
 class Box(Item):
     def __init__(self, name, location, description, price):
-        super(Box, self).__init__(name, location, description)
+        super(Box, self).__init__(name, location, description, long_name)
         self.price = price
 
 
 class Money(Item):
     def __init__(self, name, location, description, worth):
-        super(Money, self).__init__(name, location, description)
+        super(Money, self).__init__(name, location, description, long_name)
         self.worth = worth
 
 
 class Coupon(Item):
     def __init__(self, name, location, description, worth):
-        super(Coupon, self).__init__(name, location, description)
+        super(Coupon, self).__init__(name, location, description, long_name)
         self.worth = worth
 
 
-park_keyring = Key("park keyring", benches, "can be used to unlock the park gates.")
-dump_key = Key("dump key", dumpsters_2, "can be used to unlock the dump gates.")
-zoo_key = Key("zoo key", dumpsters, "can unlock the zoo gate.")
+park_keyring = Key("keyring", benches, "can be used to unlock the park gates.", [gate_1, gate_2, gate_3],
+                   "The Key to the Dump")
+dump_key = Key("key", dumpsters_2, "can be used to unlock the dump gates.", [dump_gate, dump_gate_2])
+zoo_key = Key("key", dumpsters, "can unlock the zoo gate.")
 mechanical_pencil = Pencil("mechanical pencil", stationary_store, "it is plastic and has an eraser", 5)
-number_2_pencil = Pencil("a number 2 pencil", stationary_store, "A thin, yellow, sharpened pencil with a pink eraser "
-                                                                "on one end.", 1)
+number_2_pencil = Pencil("pencil", stationary_store, "A thin, yellow, sharpened pencil with a pink eraser "
+                                                     "on one end.", 1)
 box_of_chocolates = FerreroRocher("box of chocolates", candy_store, "a clear plastic box filled with twelve Ferrero "
                                                                     "Rocher candies.", 12)
-small_box = Box("small box", office_store, "a very small cardboard box, about the size of a shoebox", 5)
-regular_box = Box("normal box", office_store, "a medium sized box, one side is missing", 7)
-big_box = Box("big box", office_store, "a person could definitely fit inside.", 10)
+small_box = Box("box", office_store, "a very small cardboard box, about the size of a shoebox", 5)
+regular_box = Box("box", office_store, "a medium sized box, one side is missing", 7)
+big_box = Box("box", office_store, "a person could definitely fit inside.", 10)
 penny = Money("penny", fountain, "is worth one cent.", 0.01)
 quarter = Money("quarter", fountain, "is worth twenty-five cents.", 0.25)
 dollar_bill = Money("dollar bill", clearing, "is worth one dollar.", 1)
@@ -329,6 +334,7 @@ trash_guy = Character("A man", "pile_of_trash", "He is dressed in baggy clothes 
 
 player.location = bridge
 playing = True
+gotten_coins_at_fountain = False
 directions = ["north", "east", "south", "west", "northeast", "northwest", "southeast", "southwest"]
 
 while playing:
@@ -364,6 +370,27 @@ while playing:
         playing = False
 
         continue
+
+    elif command.lower() in ["inventory", "check inventory", "what do i have"]:
+        print("You have a %s." % player.inventory)
+        print("You have $%d." % player.wallet)
+        print()
+
+    elif command.lower() in ["get coins", "pick up coins"] and player.location == fountain:
+        if not gotten_coins_at_fountain:
+            gotten_coins_at_fountain = True
+            number_of_coins = random.randint(1, 7)
+            while number_of_coins > 0:
+                number_of_coins -= 1
+                player.inventory.append(penny)
+                player.wallet += penny.worth
+                player.inventory.append(quarter)
+                player.wallet += quarter.worth
+            print("You picked up a handful of coins. You now have $%f. " % player.wallet)
+            print()
+        else:
+            print("You have already gotten coins from this fountain. There are no more.")
+            print()
 
     elif command.lower() in directions:  # moving from room to room
 
@@ -404,8 +431,8 @@ while playing:
             player.inventory.append(found_item)
             player.wallet += found_item.worth
             found_item.location = player.inventory
-            print("You have %s" % found_item.name)
-            print("You have $%d." % player.wallet)
+            print("You have a %s" % found_item.name)
+            print("You have $%f." % float(player.wallet))
 
         else:
             player.inventory.append(found_item)
