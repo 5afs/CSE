@@ -6,6 +6,7 @@
         <list>
           <option value="builtins.len.colors" />
           <option value="str.*" />
+          <option value="list.len" />
         </list>
       </option>
     </inspection_tool>

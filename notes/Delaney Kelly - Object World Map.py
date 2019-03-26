@@ -300,30 +300,31 @@ class Coupon(Item):
 
 
 park_keyring = Key("keyring", benches, "can be used to unlock the park gates.", [gate_1, gate_2, gate_3],
-                   "The Park Keys")
+                   "the park keys")
 dump_key = Key("key", dumpsters_2, "can be used to unlock the dump gates.", [dump_gate, dump_gate_2],
-               "The Key to the Dump")
-zoo_key = Key("key", dumpsters, "can unlock the zoo gate.", [zoo_gate], "The Key to the Zoo")
+               "the key to the dump")
+zoo_key = Key("key", dumpsters, "can unlock the zoo gate.", [zoo_gate], "the key to the zoo")
 mechanical_pencil = Pencil("mechanical pencil", stationary_store, "it is plastic and has an eraser", 5,
-                           "A Mechanical Pencil")
+                           "a mechanical pencil")
 number_2_pencil = Pencil("pencil", stationary_store, "A thin, yellow, sharpened pencil with a pink eraser "
-                                                     "on one end.", 1, "A Number Two Pencil")
+                                                     "on one end.", 1, "a number two pencil")
 box_of_chocolates = FerreroRocher("box of chocolates", candy_store, "a clear plastic box filled with twelve Ferrero "
                                                                     "Rocher candies.", 12,
                                   "A Box of Ferrero Rocher Chocolates")
-small_box = Box("box", office_store, "a very small cardboard box, about the size of a shoebox", 5, "A Small Box")
-regular_box = Box("box", office_store, "a medium sized box, one side is missing", 7, "A Regular-sized Box")
-big_box = Box("box", office_store, "a person could definitely fit inside.", 10, "A Big Box")
+small_box = Box("box", office_store, "a very small cardboard box, about the size of a shoebox", 5, "a small box")
+regular_box = Box("box", office_store, "a medium sized box, one side is missing", 7, "a regular-sized box")
+big_box = Box("box", office_store, "a person could definitely fit inside.", 10, "a big box")
 penny = Money("penny", fountain, "is worth one cent.", 0.01, None)
 quarter = Money("quarter", fountain, "is worth twenty-five cents.", 0.25, None)
 dollar_bill = Money("dollar bill", clearing, "is worth one dollar.", 1, None)
 five_dollar_bill = Money("five dollar bill", lemonade_stand, "is worth five dollars.", 5, None)
 candy_store_coupon = Coupon("coupon to the candy store", office_2, "is worth two dollars in the Sweet Tooth Candy "
                                                                    "Store.", 2,
-                            "A $2 Coupon to the Sweet Tooth Candy Store")
+                            "a $2 coupon to the Sweet Tooth Candy Store")
 stationary_store_coupon = Coupon("coupon to the stationary store", office_2, "is worth enough to get one free pencil "
-                                                                             "from the stationary store.", 1,
-                                 "A Coupon to the Stationary Store that is Worth One Free Pencil")
+                                                                             "from the stationary store.",
+                                 number_2_pencil,
+                                 " a coupon to the Stationary Store that is worth one free number two pencil")
 
 item_list = [park_keyring, dump_key, zoo_key, mechanical_pencil, number_2_pencil, box_of_chocolates, small_box,
              regular_box, big_box, penny, quarter, dollar_bill, five_dollar_bill, stationary_store_coupon,
@@ -342,8 +343,7 @@ playing = True
 gotten_coins_at_fountain = False
 long_name_inventory = []
 directions = ["north", "east", "south", "west", "northeast", "northwest", "southeast", "southwest"]
-player.inventory.append(box_of_chocolates)
-player.inventory.append(big_box)
+player.inventory.append(number_2_pencil)
 
 while playing:
     player.location.visits += 1
@@ -379,28 +379,48 @@ while playing:
 
         continue
 
-    elif command.lower() in ["inventory", "check inventory", "what do i have"]:
+    elif command.lower() in ["inventory", "check inventory", "what do i have"]:  # printing out inventory
         for item in player.inventory:
             long_name_inventory.append(item.long_name)
 
-        if len(long_name_inventory) == 1:
-            print("You have a %s." % long_name_inventory)
-            print("You have $%d." % player.wallet)
-            print()
+        if len(long_name_inventory) > 0 and player.wallet == 0:
+            if len(long_name_inventory) == 1:
+                print("You have %s and no money." % long_name_inventory[0])
+                print()
 
-        # elif len(long_name_inventory) == 2:
-        #     print("You have a %s." % long_name_inventory)
-        #     print("You have $%d." % player.wallet)
-        #     print()
+            elif len(long_name_inventory) == 2:
+                print("You have %s" % long_name_inventory[0], end="")
+                print(" and %s. You have no money." % long_name_inventory[1])
+                print()
 
-        elif len(long_name_inventory) >= 2:
+            elif len(long_name_inventory) >= 2:
+                print("You have %s" % long_name_inventory[0], end="")
+                for index in range(1, len(player.inventory) - 1):
+                    print(", %s" % long_name_inventory[index], end="")
+                print(", and %s. You have no money." % long_name_inventory[len(player.inventory) - 1])
+                print()
 
-            print("You have a %s" % long_name_inventory[0], end="")
-            for index in range(1, len(player.inventory) - 1):
-                print(", %s" % long_name_inventory[index], end="")
-            print(", and %s." % long_name_inventory[len(player.inventory) - 1])
+        else:
+            if len(long_name_inventory) == 1:
+                print("You have %s and $%.2f." % (long_name_inventory[0], player.wallet))
+                print()
 
+            elif len(long_name_inventory) == 2:
+                print("You have %s" % long_name_inventory[0], end="")
+                print(" and %s. You also $%.2f." % (long_name_inventory[1], player.wallet))
+                print()
 
+            elif len(long_name_inventory) >= 2:
+                print("You have %s" % long_name_inventory[0], end="")
+                for index in range(1, len(player.inventory) - 1):
+                    print(", %s" % long_name_inventory[index], end="")
+                print(
+                    ", and %s. You also have $%.2f." % (long_name_inventory[len(player.inventory) - 1], player.wallet))
+                print()
+
+            else:
+                print("You do not have anything.")
+                print()
 
     elif command.lower() in ["get coins", "pick up coins"] and player.location == fountain:
         if not gotten_coins_at_fountain:
