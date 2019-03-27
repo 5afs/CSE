@@ -301,9 +301,9 @@ class Coupon(Item):
 
 park_keyring = Key("keyring", benches, "can be used to unlock the park gates.", [gate_1, gate_2, gate_3],
                    "the park keys")
-dump_key = Key("key", dumpsters_2, "can be used to unlock the dump gates.", [dump_gate, dump_gate_2],
+dump_key = Key("dump key", dumpsters_2, "can be used to unlock the dump gates.", [dump_gate, dump_gate_2],
                "the key to the dump")
-zoo_key = Key("key", dumpsters, "can unlock the zoo gate.", [zoo_gate], "the key to the zoo")
+zoo_key = Key("zoo key", dumpsters, "can unlock the zoo gate.", [zoo_gate], "the key to the zoo")
 mechanical_pencil = Pencil("mechanical pencil", stationary_store, "it is plastic and has an eraser", 5,
                            "a mechanical pencil")
 number_2_pencil = Pencil("pencil", stationary_store, "A thin, yellow, sharpened pencil with a pink eraser "
@@ -311,9 +311,9 @@ number_2_pencil = Pencil("pencil", stationary_store, "A thin, yellow, sharpened 
 box_of_chocolates = FerreroRocher("box of chocolates", candy_store, "a clear plastic box filled with twelve Ferrero "
                                                                     "Rocher candies.", 12,
                                   "A Box of Ferrero Rocher Chocolates")
-small_box = Box("box", office_store, "a very small cardboard box, about the size of a shoebox", 5, "a small box")
+small_box = Box("small box", office_store, "a very small cardboard box, about the size of a shoebox", 5, "a small box")
 regular_box = Box("box", office_store, "a medium sized box, one side is missing", 7, "a regular-sized box")
-big_box = Box("box", office_store, "a person could definitely fit inside.", 10, "a big box")
+big_box = Box("big box", office_store, "a person could definitely fit inside.", 10, "a big box")
 penny = Money("penny", fountain, "is worth one cent.", 0.01, None)
 quarter = Money("quarter", fountain, "is worth twenty-five cents.", 0.25, None)
 dollar_bill = Money("dollar bill", clearing, "is worth one dollar.", 1, None)
@@ -460,6 +460,24 @@ while playing:
     elif command == "look":
         print(player.location.description)
         print()
+
+    elif "drop " in command.lower():  # getting rid of an object
+        command = command.replace("drop ", "")
+        item_names = []
+        print(command)  # delete
+        for item in item_list:
+            item_names.append(item.name)
+        print(item_names)  # delete
+
+        if command in item_names:
+            dropping_item = item_names.index(command)
+            player.inventory.remove(dropping_item)
+            player.location.objects.append(command)
+            print("You have dropped the %s." % command)
+            print(player.location.description)
+
+        else:
+            print("You do not have a %s." % command)
 
     elif "pick up" or "get" in command.lower():  # get object out of command
         command = command.replace("pick up ", "")
