@@ -464,15 +464,13 @@ while playing:
     elif "drop " in command.lower():  # getting rid of an object
         command = command.replace("drop ", "")
         item_names = []
-        print(command)  # delete
         for item in item_list:
             item_names.append(item.name)
-        print(item_names)  # delete
 
         if command in item_names:
             dropping_item = item_names.index(command)
-            player.inventory.remove(dropping_item)
-            player.location.objects.append(command)
+            player.inventory.remove(item_list[dropping_item])
+            player.location.objects.append(item_list[dropping_item])
             print("You have dropped the %s." % command)
             print(player.location.description)
 
