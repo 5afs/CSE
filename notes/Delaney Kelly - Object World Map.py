@@ -74,7 +74,7 @@ class Character(object):
 candy_store = Room("The Sweet Tooth Candy Store",
                    None, None, "alley", "dumpsters_2", None, None, None, None,
                    "There is a shelf with boxes of ferrero rocher chocolates right \n"
-                   "in front of you. They cost $18. You need to buy one. The door to \n"
+                   "in front of you. They cost $12. You need to buy one. The door to \n"
                    "the main alley south of you but to the west is another door. \n")
 
 office_store = Room("Office Depot",
@@ -86,7 +86,7 @@ office_store = Room("Office Depot",
 
 stationary_store = Room("The Stationary Store",
                         None, None, "gate_1", None, None, None, "alley", None,
-                        "There is a big wooden barrel filled with yellow pencils. They cost $4 each. The door to the \n"
+                        "There is a big wooden barrel filled with yellow pencils. They cost $1 each. The door to the \n"
                         "alley is behind you, to the Southeast but there is another door to the South. ")
 
 alley = Room("The Dark Alley",
@@ -500,6 +500,24 @@ while playing:
             player.inventory.append(found_item)
             found_item.location = player.inventory
             print("You have a %s" % found_item.name)
+
+    elif "buy" in command:
+        if player.location in [candy_store, stationary_store, office_store]:
+            command = command.replace("buy ", "")
+            for item in item_list:
+                
+            if command is Item.name:
+
+
+            if player.location is candy_store:
+
+            if player.location is stationary_store:
+
+            if player.location is office_store:
+
+
+        else:
+            print("There is nothing to buy here.")
 
     else:
         print("Command Not Recognized")
