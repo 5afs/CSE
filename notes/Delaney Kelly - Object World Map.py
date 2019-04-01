@@ -339,6 +339,7 @@ trash_guy = Character("A man", "pile_of_trash", "He is dressed in baggy clothes 
                                                                                          number_2_pencil])
 
 player.location = bridge
+available_purchases = []
 playing = True
 gotten_coins_at_fountain = False
 long_name_inventory = []
@@ -501,20 +502,30 @@ while playing:
             found_item.location = player.inventory
             print("You have a %s" % found_item.name)
 
-    elif "buy" in command:
-        if player.location in [candy_store, stationary_store, office_store]:
-            command = command.replace("buy ", "")
+    elif "buy" in command:  # buying objects
+        if player.location in [candy_store, stationary_store, office_store]:  # if the player is in a store
+            command = command.replace("buy ", "")  # removing "buy" and getting object to buy
             for item in item_list:
-                
-            if command is Item.name:
+                if item.location in [candy_store, stationary_store, office_store]:
+                    available_purchases = available_purchases.append[item.name]
+
+            item_names = []
+            for item in item_list:
+                item_names.append(item.name)
+
+            if command in item_names:  # buying the item
+                purchase = item_list.index(item_names.index(command))
+
+                if command.location == player.location:
+                    if player.wallet >= purchase.price:
+
+                    else:
+                        print("You do not have enough money to buy this. You need %.2f more. "
+                              % purchase.price - player.wallet)
 
 
-            if player.location is candy_store:
-
-            if player.location is stationary_store:
-
-            if player.location is office_store:
-
+                else:
+                    print("There is nothing to buy here.")
 
         else:
             print("There is nothing to buy here.")
