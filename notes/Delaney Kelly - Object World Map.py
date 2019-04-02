@@ -1,8 +1,9 @@
 import random
 
 print("Today is Catherine's birthday. You need to get her a number 2 pencil so she can copy your homework, a box of \n"
-      "chocolates for her to eat, and a large box for her to live in.\n"
-      "")
+      "chocolates for her to eat, and a large box for her to live in. You have $5 but you will need more to buy\n"
+      "these things.")
+print()
 
 
 class LockException(Exception):
@@ -338,8 +339,8 @@ trash_guy = Character("A man", "pile_of_trash", "He is dressed in baggy clothes 
                                                                                          number_2_pencil,
                                                                                          number_2_pencil])
 
-player.location = bridge
-available_purchases = []
+player.location = stationary_store  # make bridge later
+player.wallet = 5
 playing = True
 gotten_coins_at_fountain = False
 long_name_inventory = []
@@ -423,6 +424,30 @@ while playing:
                 print("You do not have anything.")
                 print()
 
+    elif "buy" in command:  # buying objects
+        if player.location in [candy_store, stationary_store, office_store]:  # if the player is in a store
+            command = command.replace("buy ", "")  # removing "buy" and getting object to buy
+
+            item_names = []
+            for item in item_list:
+                item_names.append(item.name)
+
+            if command in item_names:  # buying the item
+                if command.location == player.location and player.wallet >= purchase.item_list.index(
+                        item_names.index(command)):
+                    player.inventory.append(item_list.index(item_names.index(command)))
+                    player.location.objects.remove(item_list.index(item_names.index(command)))
+                    player.wallet -= purchase.price
+                    print("You have bought a %s." % item_names.index(item_list.index(command)))
+                    print("You have $.2f." % player.wallet)
+
+                else:
+                    print("You do not have enough money to buy this. You need %.2f more. "
+                          % purchase.price - player.wallet)
+
+            else:
+                print("There is nothing to buy here.")
+
     elif command.lower() in ["get coins", "pick up coins"] and player.location == fountain:
         if not gotten_coins_at_fountain:
             gotten_coins_at_fountain = True
@@ -502,34 +527,6 @@ while playing:
             found_item.location = player.inventory
             print("You have a %s" % found_item.name)
 
-    elif "buy" in command:  # buying objects
-        if player.location in [candy_store, stationary_store, office_store]:  # if the player is in a store
-            command = command.replace("buy ", "")  # removing "buy" and getting object to buy
-            for item in item_list:
-                if item.location in [candy_store, stationary_store, office_store]:
-                    available_purchases = available_purchases.append[item.name]
-
-            item_names = []
-            for item in item_list:
-                item_names.append(item.name)
-
-            if command in item_names:  # buying the item
-                purchase = item_list.index(item_names.index(command))
-
-                if command.location == player.location:
-                    if player.wallet >= purchase.price:
-
-                    else:
-                        print("You do not have enough money to buy this. You need %.2f more. "
-                              % purchase.price - player.wallet)
-
-
-                else:
-                    print("There is nothing to buy here.")
-
-        else:
-            print("There is nothing to buy here.")
-
-    else:
-        print("Command Not Recognized")
-        print()
+else:
+    print("Command Not Recognized")
+    print()
