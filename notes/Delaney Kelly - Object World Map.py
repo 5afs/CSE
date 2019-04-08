@@ -88,7 +88,7 @@ office_store = Room("Office Depot",
 stationary_store = Room("The Stationary Store",
                         None, None, "gate_1", None, None, None, "alley", None,
                         "There is a big wooden barrel filled with yellow pencils. They cost $1 each. The door to the \n"
-                        "alley is behind you, to the Southeast but there is another door to the South. ")
+                        "alley is behind you, to the Southeast, but there is another door to the South. ")
 
 alley = Room("The Dark Alley",
              "office_store", None, "under_the_bridge", None, "candy_store", "stationary_store", None, None,
@@ -339,14 +339,15 @@ trash_guy = Character("A man", "pile_of_trash", "He is dressed in baggy clothes 
                                                                                          number_2_pencil,
                                                                                          number_2_pencil])
 
-player.location = stationary_store  # make bridge later
+player.location = bridge  # make bridge later
 player.wallet = 5
 item_names = []
 playing = True
 gotten_coins_at_fountain = False
 long_name_inventory = []
 directions = ["north", "east", "south", "west", "northeast", "northwest", "southeast", "southwest"]
-player.inventory.append(number_2_pencil)
+short_directions = ["n", "e", "s", "w", "ne", "nw", "se", "sw"]
+player.inventory.append(park_keyring)
 
 while playing:
     player.location.visits += 1
@@ -376,11 +377,41 @@ while playing:
 
     command = input(">_")
 
+    if command.lower() in short_directions:
+        pos = short_directions.index(command)
+        command = directions[pos]
+
     if command.lower() in ['q', 'quit' 'exit']:  # ending game
         print("You have ended the game.")
         playing = False
 
         continue
+
+    elif "unlock" in command.lower():
+        if player.location is Gate:
+            if player.location.locked:
+                if Key in player.inventory:
+                    for Key in player.inventory:
+                        if Key.unlocks == player.location:
+                            player.location.locked = False
+                            print("You have unlocked the gate")
+                            print()
+
+                        else:
+                            print("You do not have the key to unlock this gate.")
+                            print()
+
+                else:
+                    print("You do not have any keys to unlock this gate.")
+                    print()
+
+            else:
+                print("The gate is already unlocked.")
+                print()
+
+        else:
+            print("You are not at a gate.")
+            print()
 
     elif command.lower() in ["inventory", "check inventory", "what do i have"]:  # printing out inventory
         for item in player.inventory:
@@ -425,33 +456,30 @@ while playing:
                 print("You do not have anything.")
                 print()
 
-    elif "buy" in command:  # buying objects
+    elif "buy " in command:  # buying objects
         if player.location in [candy_store, stationary_store, office_store]:  # if the player is in a store
             command = command.replace("buy ", "")
 
         for item in item_list:
-                item_names.append(item.name)
+            item_names.append(item.name)
 
         purchase = None
         for item in item_list:
             if item.name == command and item.location == player.location:
                 purchase = item
 
-        if purchase is not None and purchase.location == player.location:
-            print(purchase)
-            print(player.location.objects)
-            print(purchase.location)
-            print(player.location)
-            player.inventory.append(purchase)
-            player.wallet -= purchase.price
-            player.location.objects.remove(purchase)
-            print("You have bought a %s. You now have $%.2f." % (purchase.long_name, player.wallet))
+        if purchase.location == player.location:
+            if player.wallet >= purchase.price:
+                player.wallet -= purchase.price
+                player.inventory.append(purchase)
+                purchase.location = player.inventory
+                print("You have bought %s. You now have $%.2f." % (purchase.long_name, player.wallet))
 
-        elif purchase is not None and purchase.location != player.location:
-            print("You cannot buy that here.")
+            else:
+                print("You do not have enough money to buy this.")
 
         else:
-            print("There is nothing to buy here.")
+            print("You cannot buy that here.")
 
     elif command.lower() in ["get coins", "pick up coins"] and player.location == fountain:
         if not gotten_coins_at_fountain:
@@ -508,7 +536,7 @@ while playing:
         else:
             print("You do not have a %s." % command)
 
-    elif "pick up" or "get" in command.lower():  # get object out of command
+    elif "pick up " or "get " in command.lower():  # get object out of command
         command = command.replace("pick up ", "")
         # Search for matching item
         found_item = None
