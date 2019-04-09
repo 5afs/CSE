@@ -54,7 +54,7 @@ class Gate(Room):
 
 
 class Character(object):
-    def __init__(self, name, starting_point, description, inventory=None, wallet=float(0)):
+    def __init__(self, name, starting_point, description, inventory=None, wallet=float(0), caught):
         if inventory is None:
             inventory = []
         self.name = name
@@ -62,6 +62,7 @@ class Character(object):
         self.description = description
         self.inventory = inventory
         self.wallet = wallet
+        self.caught = False
 
     def move(self, new_location):
         """ this method moves a character to a new location
@@ -332,12 +333,12 @@ item_list = [park_keyring, dump_key, zoo_key, mechanical_pencil, number_2_pencil
              candy_store_coupon]
 
 #  Characters
-player = Character("You", "bridge", None, [])
-catherine = Character("Catherine", "front_of_cage", None, [])
+player = Character("You", "bridge", None, [], False)
+catherine = Character("Catherine", "front_of_cage", None, [], False)
 trash_guy = Character("A man", "pile_of_trash", "He is dressed in baggy clothes and riding a bicycle. In his bike "
                                                 "basket is a bundle of no. 2 pencils.", [number_2_pencil,
                                                                                          number_2_pencil,
-                                                                                         number_2_pencil])
+                                                                                         number_2_pencil], False)
 
 player.location = bridge  # make bridge later
 player.wallet = 5
@@ -348,6 +349,7 @@ long_name_inventory = []
 directions = ["north", "east", "south", "west", "northeast", "northwest", "southeast", "southwest"]
 short_directions = ["n", "e", "s", "w", "ne", "nw", "se", "sw"]
 player.inventory.append(park_keyring)
+skip = False
 
 while playing:
     player.location.visits += 1
@@ -361,7 +363,8 @@ while playing:
         print(player.location.description_unlocked)
         print()
 
-    elif player.location.visits < 2:  # only printing location description if they've not been there twice before
+    elif player.location.visits < 2 and skip is False:
+        # only printing location description if they've not been there twice before
         print(player.location.name)
         print(player.location.description)
         print()
@@ -374,7 +377,7 @@ while playing:
         if item.location == player.location.name:
             player.location.description.append(item.description)
             continue
-
+    skip = False
     command = input(">_")
 
     if command.lower() in short_directions:
@@ -388,23 +391,22 @@ while playing:
         continue
 
     elif "unlock" in command.lower():
-        if player.location is Gate:
+        skip = True
+        if type(player.location) is Gate:
             if player.location.locked:
-                if Key in player.inventory:
-                    for Key in player.inventory:
-                        if Key.unlocks == player.location:
+                for thing in player.inventory:
+                    if type(thing) is Key:
+                        if player.location in thing.unlocks:
                             player.location.locked = False
+                            player.location.unreachable = []
                             print("You have unlocked the gate")
                             print()
-
                         else:
-                            print("You do not have the key to unlock this gate.")
-                            print()
+                            print("_")
 
-                else:
-                    print("You do not have any keys to unlock this gate.")
-                    print()
-
+                    else:
+                        print("You do not have the key to unlock this gate.")
+                        print()
             else:
                 print("The gate is already unlocked.")
                 print()
@@ -414,6 +416,7 @@ while playing:
             print()
 
     elif command.lower() in ["inventory", "check inventory", "what do i have"]:  # printing out inventory
+        skip = True
         for item in player.inventory:
             long_name_inventory.append(item.long_name)
 
@@ -457,6 +460,7 @@ while playing:
                 print()
 
     elif "buy " in command:  # buying objects
+        skip = True
         if player.location in [candy_store, stationary_store, office_store]:  # if the player is in a store
             command = command.replace("buy ", "")
 
@@ -482,6 +486,7 @@ while playing:
             print("You cannot buy that here.")
 
     elif command.lower() in ["get coins", "pick up coins"] and player.location == fountain:
+        skip = True
         if not gotten_coins_at_fountain:
             gotten_coins_at_fountain = True
             number_of_coins = random.randint(1, 7)
@@ -521,6 +526,7 @@ while playing:
         print()
 
     elif "drop " in command.lower():  # getting rid of an object
+        skip = True
         command = command.replace("drop ", "")
         item_names = []
         for item in item_list:
@@ -537,6 +543,7 @@ while playing:
             print("You do not have a %s." % command)
 
     elif "pick up " or "get " in command.lower():  # get object out of command
+        skip = True
         command = command.replace("pick up ", "")
         # Search for matching item
         found_item = None

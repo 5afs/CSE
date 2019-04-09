@@ -39,6 +39,70 @@ class Coupon(Item):
         self.worth = worth
 
 
+class Food(Item):
+    def __init__(self, name, description, type):
+        super(Food, self).__init__(name, description)
+        self.type = type
+
+
+class Car(Item):
+    def __init__(self, name, description, brand, type, fuel, year):
+        super(Car, self).__init__(name, description)
+        self.brand = brand
+        self.type = type
+        self.fuel = fuel
+        self.year = year
+
+
+class Pet(Item):
+    def __init__(self, name, description, kind, age):
+        super(Pet, self).__init__(name, description)
+        self.kind = kind
+        self.age = age
+
+
+class Sweater(Item):
+    def __init__(self, name, description, color, style, material):
+        super(Sweater, self).__init__(name, description)
+        self.color = color
+        self.style = style
+        self.material = material
+
+
+class Monster(Item):
+    def __init__(self, name, description, weapon):
+        super(Monster, self).__init__(name, description)
+        self.weapon = weapon
+
+
+class Computer(Item):
+    def __init__(self, name, description, price, brand, year):
+        super(Computer, self).__init__(name, description)
+        self.price = price
+        self.brand = brand
+        self.year = year
+
+
+class Notebook(Item):
+    def __init__(self, name, description, paper_count, paper_rule):
+        super(Notebook, self).__init__(name, description)
+        self.paper_count = paper_count
+        self.paper_rule = paper_rule
+
+
+class Clock(Item):
+    def __init__(self, name, description, time):
+        super(Clock, self).__init__(name, description)
+        self.time = time
+
+
+class Glasses(Item):
+    def __init__(self, name, description, strength, color):
+        super(Glasses, self).__init__(name, description)
+        self.strength = strength
+        self.color = color
+
+
 park_keyring = Key("A keyring", "can be used to unlock the park gates.")
 dump_keyring = Key("Keys to the dump", "can be used to unlock the dump gates.")
 zoo_key = Key("Key to the zoo", "can unlock the zoo gate.")
