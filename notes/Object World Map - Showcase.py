@@ -340,9 +340,8 @@ trash_guy = Character("A man", "pile_of_trash", "He is dressed in baggy clothes 
                                                                                                 number_2_pencil,
                                                                                                 number_2_pencil])
 
-player.location = front_of_cage  # make bridge later
+player.location = bridge  # make bridge later
 player.wallet = 5
-player.inventory.append(number_2_pencil)
 item_names = []
 playing = True
 gotten_coins_at_fountain = False
@@ -350,7 +349,6 @@ long_name_inventory = []
 directions = ["north", "east", "south", "west", "northeast", "northwest", "southeast", "southwest"]
 short_directions = ["n", "e", "s", "w", "ne", "nw", "se", "sw"]
 skip = False
-moves = 0
 
 while playing:
     player.location.visits += 1
@@ -384,37 +382,14 @@ while playing:
     if command.lower() in short_directions:
         pos = short_directions.index(command)
         command = directions[pos]
-
+ nkipppppppppp[[[[[[[[[ljbjnbbbbb jb ]]]]]]]]]
     if command.lower() in ['q', 'quit' 'exit']:  # ending game
-        print("You have ended the game. You made %s moves." % moves)
+        print("You have ended the game.")
         playing = False
 
         continue
 
-    elif "give" in command.lower() and "catherine" in command.lower():
-        moves += 1
-        if player.location == front_of_cage:
-            command = command.replace("give ", "")
-            command = command.replace(" to catherine", "")
-            gift = None
-            for thing in player.inventory:
-                if thing.name.lower() == command.lower():
-                    gift = thing
-
-            if gift is not None:
-                player.inventory.remove(gift)
-                catherine.inventory.append(gift)
-                print("You have given Catherine %s." % gift.long_name)
-
-            if [number_2_pencil, box_of_chocolates, big_box] in catherine.inventory:
-                print("You have won the game! You made %s moves." % moves)
-                playing = False
-
-        else:
-            print("Catherine is not here.")
-
     elif "unlock" in command.lower():
-        moves += 1
         skip = True
         if type(player.location) is Gate:
             if player.location.locked:
@@ -440,7 +415,6 @@ while playing:
             print()
 
     elif command.lower() in ["inventory", "check inventory", "what do i have"]:  # printing out inventory
-        moves += 1
         skip = True
         for item in player.inventory:
             long_name_inventory.append(item.long_name)
@@ -485,7 +459,6 @@ while playing:
                 print()
 
     elif "buy " in command:  # buying objects
-        moves += 1
         skip = True
         if player.location in [candy_store, stationary_store, office_store]:  # if the player is in a store
             command = command.replace("buy ", "")
@@ -512,7 +485,6 @@ while playing:
             print("You cannot buy that here.")
 
     elif command.lower() in ["get coins", "pick up coins"] and player.location == fountain:
-        moves += 1
         skip = True
         if not gotten_coins_at_fountain:
             gotten_coins_at_fountain = True
@@ -530,7 +502,6 @@ while playing:
             print()
 
     elif command.lower() in directions:  # moving from room to room
-        moves += 1
 
         try:
             # command is 'north'
@@ -550,12 +521,10 @@ while playing:
             print()
 
     elif command == "look":
-        moves += 1
         print(player.location.description)
         print()
 
     elif "drop " in command.lower():  # getting rid of an object
-        moves += 1
         skip = True
         command = command.replace("drop ", "")
         item_names = []
@@ -573,7 +542,6 @@ while playing:
             print("You do not have a %s." % command)
 
     elif "pick up " or "get " in command.lower():  # get object out of command
-        moves += 1
         skip = True
         command = command.replace("pick up ", "")
         # Search for matching item
