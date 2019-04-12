@@ -151,11 +151,12 @@ office_2 = Room("An Office",
                 "To the North is the Second Dump Gate. To the West are piles of trash that you won't be able to \n"
                 "walk through, but to the South is a narrow path between the piles of trash. ")
 
-pile_of_trash = Room("The Middle of Many Piles of Trash",
+pile_of_trash = Room("The Middle of the Dump",
                      None, "office", None, "office_2", None, None, None, None,
                      "You are in the middle of heaps of garbage. You can barely walk through them but to the East \n"
                      "is the main office and to the West is another, smaller, office. The doors to both offices are \n"
-                     "unlocked. ")
+                     "unlocked. There is a man pushing a cart towards you. He is dressed in baggy clothes and riding \n"
+                     "a bicycle. In his bike basket is a bundle of no. 2 pencils.")
 
 west_of_cage = Room("West of the Monkey Cage",
                     None, None, "front_of_cage", None, "zoo_gate", None, None, None,
@@ -303,9 +304,9 @@ class Coupon(Item):
 
 park_keyring = Key("keyring", benches, "can be used to unlock the park gates.", [gate_1, gate_2, gate_3],
                    "the park keys")
-dump_key = Key("dump key", dumpsters_2, "can be used to unlock the dump gates.", [dump_gate, dump_gate_2],
+dump_key = Key("key", dumpsters_2, "can be used to unlock the dump gates.", [dump_gate, dump_gate_2],
                "the key to the dump")
-zoo_key = Key("zoo key", dumpsters, "can unlock the zoo gate.", [zoo_gate], "the key to the zoo")
+zoo_key = Key("key", dumpsters, "can unlock the zoo gate.", [zoo_gate], "the key to the zoo")
 mechanical_pencil = Pencil("mechanical pencil", stationary_store, "it is plastic and has an eraser", 5,
                            "a mechanical pencil")
 number_2_pencil = Pencil("pencil", stationary_store, "A thin, yellow, sharpened pencil with a pink eraser "
@@ -335,12 +336,14 @@ item_list = [park_keyring, dump_key, zoo_key, mechanical_pencil, number_2_pencil
 #  Characters
 player = Character("You", "bridge", None, False, [])
 catherine = Character("Catherine", "front_of_cage", None, False, [])
-trash_guy = Character("A man", "pile_of_trash", "He is dressed in baggy clothes and riding a bicycle. In his bike "
-                                                "basket is a bundle of no. 2 pencils.", False, [number_2_pencil,
-                                                                                                number_2_pencil,
-                                                                                                number_2_pencil])
+hobo = Character("A man", "pile_of_trash", "He is dressed in baggy clothes and riding a bicycle. In his bike "
+                                           "basket is a bundle of no. 2 pencils.", False, [number_2_pencil,
+                                                                                           number_2_pencil,
+                                                                                           number_2_pencil])
 
-player.location = front_of_cage  # make bridge later
+besides_player_list = [catherine, hobo]
+print_there_is_no = False
+player.location = pile_of_trash  # make bridge later
 player.wallet = 5
 player.inventory.append(number_2_pencil)
 item_names = []
@@ -354,6 +357,7 @@ moves = 0
 
 while playing:
     player.location.visits += 1
+
     if isinstance(player.location, Gate) and player.location.locked:
         print(player.location.name)
         print(player.location.description)
@@ -390,6 +394,26 @@ while playing:
         playing = False
 
         continue
+
+    elif player.location == pile_of_trash and "take" in command.lower():
+        moves += 1
+        command = command.replace("take ", "")
+        command = command.replace("from ", "")
+        command = command.replace("the hobo", "")
+        print(list(command))
+        skip = True
+        hobo_stuff_names = []
+
+        for Item in hobo.inventory:
+            hobo_stuff_names.append(Item.name)
+
+        if command in hobo_stuff_names:
+            taking_item = (hobo_stuff_names[command])
+            hobo.inventory.remove(taking_item)
+            print(hobo.inventory)
+
+        else:
+            print("The man does not have a %s." % command)
 
     elif "give" in command.lower() and "catherine" in command.lower():
         moves += 1
@@ -574,6 +598,7 @@ while playing:
 
     elif "pick up " or "get " in command.lower():  # get object out of command
         moves += 1
+        og_command = command
         skip = True
         command = command.replace("pick up ", "")
         # Search for matching item
@@ -583,7 +608,9 @@ while playing:
             if item.name == command and item.location == player.location:
                 found_item = item
 
-        if found_item is None:
+        print_there_is_no = True
+
+        if found_item is None and print_there_is_no and "pick up " or "get " in og_command:
             print("There is no %s in this room" % command)
 
         elif isinstance(found_item, Money):
