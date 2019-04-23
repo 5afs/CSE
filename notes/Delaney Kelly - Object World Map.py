@@ -141,13 +141,15 @@ fountain = Room("The Fountain",
 
 office = Room("The Dump's Office",
               "dump_gate", "trash_piles", "path_through_trash", None, None, None, None, None,
-              "You are in the main dump office. There are piles of paper scattered on all the desks. You see \n"
+              "You are in the main dump office. You can hear the heavy footsteps of a dump guard coming towards \n"
+              "the office. There are piles of paper scattered on all the desks. You see \n"
               "a big cup of new yellow pencils. To the North is the main dump gate. To the East is a dense \n"
               "pile of trash that you can't get through but to the South is a gap that you can fit through. ")
 
 office_2 = Room("An Office",
                 "dump_gate_2", None, "path_through_trash", "trash_piles", None, None, None, None,
-                "You are in a small office. It is empty and there are no office supplies. It looks deserted. \n"
+                "You are in a small office. It is empty and there are no office supplies. It looks deserted but you \n"
+                "can hear the heavy footsteps of a dump guard coming towards the office. \n"
                 "To the North is the Second Dump Gate. To the West are piles of trash that you won't be able to \n"
                 "walk through, but to the South is a narrow path between the piles of trash. ")
 
@@ -336,6 +338,7 @@ item_list = [park_keyring, dump_key, zoo_key, mechanical_pencil, number_2_pencil
 #  Characters
 player = Character("You", "bridge", None, False, [])
 catherine = Character("Catherine", "front_of_cage", None, False, [])
+guard = Character(None, ["benches", "office"], None, False, [])
 hobo = Character("A man", "pile_of_trash", "He is dressed in baggy clothes and riding a bicycle. In his bike "
                                            "basket is a bundle of no. 2 pencils.", False, [number_2_pencil,
                                                                                            number_2_pencil,
@@ -343,7 +346,7 @@ hobo = Character("A man", "pile_of_trash", "He is dressed in baggy clothes and r
 
 besides_player_list = [catherine, hobo]
 print_there_is_no = False
-player.location = pile_of_trash  # make bridge later
+player.location = benches  # make bridge later
 player.wallet = 5
 player.inventory.append(number_2_pencil)
 item_names = []
@@ -357,6 +360,21 @@ moves = 0
 
 while playing:
     player.location.visits += 1
+
+    if player.location == guard.location:
+        caught_chance = random.randint(1, 100)
+        if caught_chance >= 70:
+            if player.location == benches:
+                print("You woke the guard up. He caught you.")
+                print()
+                player.caught = True
+
+            else:
+                print("You have been caught.")
+                print()
+
+    if player.caught:
+        playing = False
 
     if isinstance(player.location, Gate) and player.location.locked:
         print(player.location.name)
@@ -390,6 +408,7 @@ while playing:
         command = directions[pos]
 
     if command.lower() in ['q', 'quit' 'exit']:  # ending game
+        print("GAME OVER")
         print("You have ended the game. You made %s moves." % moves)
         playing = False
 
@@ -400,20 +419,27 @@ while playing:
         command = command.replace("take ", "")
         command = command.replace("from ", "")
         command = command.replace("the hobo", "")
-        print(list(command))
         skip = True
         hobo_stuff_names = []
 
-        for Item in hobo.inventory:
-            hobo_stuff_names.append(Item.name)
+        if "pencils" in command:
+            pn = 0
+            for number_2_pencil in hobo.inventory:
+                pn += 1
+                hobo.inventory.remove(number_2_pencil)
+                player.inventory.append(number_2_pencil)
+            print("You have taken the pencils. You now have %d." % pn)
+            print()
 
-        if command in hobo_stuff_names:
-            taking_item = (hobo_stuff_names[command])
-            hobo.inventory.remove(taking_item)
-            print(hobo.inventory)
+        elif "pencil" in command:
+            hobo.inventory.remove(number_2_pencil)
+            player.inventory.append(number_2_pencil)
+            print("You have taken the pencil.")
+            print()
 
         else:
             print("The man does not have a %s." % command)
+            print()
 
     elif "give" in command.lower() and "catherine" in command.lower():
         moves += 1
@@ -429,6 +455,7 @@ while playing:
                 player.inventory.remove(gift)
                 catherine.inventory.append(gift)
                 print("You have given Catherine %s." % gift.long_name)
+                print()
 
             if [number_2_pencil, box_of_chocolates, big_box] in catherine.inventory:
                 print("You have won the game! You made %s moves." % moves)
@@ -436,6 +463,7 @@ while playing:
 
         else:
             print("Catherine is not here.")
+            print()
 
     elif "unlock" in command.lower():
         moves += 1
@@ -528,12 +556,15 @@ while playing:
                 player.inventory.append(purchase)
                 purchase.location = player.inventory
                 print("You have bought %s. You now have $%.2f." % (purchase.long_name, player.wallet))
+                print()
 
             else:
                 print("You do not have enough money to buy this.")
+                print()
 
         else:
             print("You cannot buy that here.")
+            print()
 
     elif command.lower() in ["get coins", "pick up coins"] and player.location == fountain:
         moves += 1
@@ -591,10 +622,12 @@ while playing:
             player.inventory.remove(item_list[dropping_item])
             player.location.objects.append(item_list[dropping_item])
             print("You have dropped the %s." % command)
+            print()
             print(player.location.description)
 
         else:
             print("You do not have a %s." % command)
+            print()
 
     elif "pick up " or "get " in command.lower():  # get object out of command
         moves += 1
@@ -612,6 +645,7 @@ while playing:
 
         if found_item is None and print_there_is_no and "pick up " or "get " in og_command:
             print("There is no %s in this room" % command)
+            print()
 
         elif isinstance(found_item, Money):
             player.inventory.append(found_item)
@@ -619,12 +653,18 @@ while playing:
             found_item.location = player.inventory
             print("You have a %s" % found_item.name)
             print("You have $%.2f." % player.wallet)
+            print()
 
         else:
             player.inventory.append(found_item)
             found_item.location = player.inventory
             print("You have a %s" % found_item.name)
+            print()
 
 else:
     print("Command Not Recognized")
     print()
+
+if playing:
+    print("GAME OVER")
+    print("You made %d moves." % moves)
