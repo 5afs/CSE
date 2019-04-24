@@ -503,14 +503,14 @@ while playing:
                 print()
 
             elif len(long_name_inventory) == 2:
-                print("You have %s" % long_name_inventory[0], end="")
+                print("You have %s" % long_name_inventory[0], "")
                 print(" and %s. You have no money." % long_name_inventory[1])
                 print()
 
             elif len(long_name_inventory) >= 2:
-                print("You have %s" % long_name_inventory[0], end="")
+                print("You have %s" % long_name_inventory[0], "")
                 for index in range(1, len(player.inventory) - 1):
-                    print(", %s" % long_name_inventory[index], end="")
+                    print(", %s" % long_name_inventory[index], "")
                 print(", and %s. You have no money." % long_name_inventory[len(player.inventory) - 1])
                 print()
 
@@ -520,14 +520,14 @@ while playing:
                 print()
 
             elif len(long_name_inventory) == 2:
-                print("You have %s" % long_name_inventory[0], end="")
+                print("You have %s" % long_name_inventory[0], "")
                 print(" and %s. You also $%.2f." % (long_name_inventory[1], player.wallet))
                 print()
 
             elif len(long_name_inventory) >= 2:
-                print("You have %s" % long_name_inventory[0], end="")
+                print("You have %s" % long_name_inventory[0], "")
                 for index in range(1, len(player.inventory) - 1):
-                    print(", %s" % long_name_inventory[index], end="")
+                    print(", %s" % long_name_inventory[index], "")
                 print(
                     ", and %s. You also have $%.2f." % (long_name_inventory[len(player.inventory) - 1], player.wallet))
                 print()
