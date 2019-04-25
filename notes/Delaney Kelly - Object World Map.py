@@ -314,22 +314,22 @@ mechanical_pencil = Pencil("mechanical pencil", stationary_store, "it is plastic
 number_2_pencil = Pencil("pencil", stationary_store, "A thin, yellow, sharpened pencil with a pink eraser "
                                                      "on one end.", 1, "a number two pencil")
 box_of_chocolates = FerreroRocher("box of chocolates", candy_store, "a clear plastic box filled with twelve Ferrero "
-                                                                    "Rocher candies.", 12,
+                                                                    "Rocher candies", 12,
                                   "A Box of Ferrero Rocher Chocolates")
 small_box = Box("small box", office_store, "a very small cardboard box, about the size of a shoebox", 5, "a small box")
 regular_box = Box("box", office_store, "a medium sized box, one side is missing", 7, "a regular-sized box")
-big_box = Box("big box", office_store, "a person could definitely fit inside.", 10, "a big box")
-penny = Money("penny", fountain, "is worth one cent.", 0.01, None)
-quarter = Money("quarter", fountain, "is worth twenty-five cents.", 0.25, None)
-dollar_bill = Money("dollar bill", clearing, "is worth one dollar.", 1, None)
-five_dollar_bill = Money("five dollar bill", lemonade_stand, "is worth five dollars.", 5, None)
-candy_store_coupon = Coupon("coupon to the candy store", office_2, "is worth two dollars in the Sweet Tooth Candy "
-                                                                   "Store.", 2,
+big_box = Box("big box", office_store, "a person could definitely fit inside", 10, "a big box")
+penny = Money("penny", fountain, "a penny", 0.01, None)
+quarter = Money("quarter", fountain, "a quarter", 0.25, None)
+dollar_bill = Money("dollar bill", clearing, "a dollar bill", 1, None)
+five_dollar_bill = Money("five dollar bill", lemonade_stand, " a five dollar bill", 5, None)
+candy_store_coupon = Coupon("coupon to the candy store", office_2, "a coupon that is worth two dollars in the "
+                                                                   "Sweet Tooth Candy Store", 2,
                             "a $2 coupon to the Sweet Tooth Candy Store")
-stationary_store_coupon = Coupon("coupon to the stationary store", office_2, "is worth enough to get one free pencil "
-                                                                             "from the stationary store.",
+stationary_store_coupon = Coupon("coupon to the stationary store", office_2, "a coupon that is worth enough to get one "
+                                                                             "free pencil from the stationary store",
                                  number_2_pencil,
-                                 " a coupon to the Stationary Store that is worth one free number two pencil")
+                                 "a coupon to the Stationary Store that is worth one free number two pencil")
 
 item_list = [park_keyring, dump_key, zoo_key, mechanical_pencil, number_2_pencil, box_of_chocolates, small_box,
              regular_box, big_box, penny, quarter, dollar_bill, five_dollar_bill, stationary_store_coupon,
@@ -346,7 +346,7 @@ hobo = Character("A man", "pile_of_trash", "He is dressed in baggy clothes and r
 
 besides_player_list = [catherine, hobo]
 print_there_is_no = False
-player.location = benches  # make bridge later
+player.location = bridge
 player.wallet = 5
 player.inventory.append(number_2_pencil)
 item_names = []
@@ -378,6 +378,7 @@ while playing:
 
     if isinstance(player.location, Gate) and player.location.locked:
         print(player.location.name)
+
         print(player.location.description)
         print()
 
@@ -407,7 +408,8 @@ while playing:
         pos = short_directions.index(command)
         command = directions[pos]
 
-    if command.lower() in ['q', 'quit' 'exit']:  # ending game
+    if command.lower() in ['q', 'quit' 'exit'] or "jump" in command.lower() and player.location == bridge:
+        # ending the game
         print("GAME OVER")
         print("You have ended the game. You made %s moves." % moves)
         playing = False
@@ -634,6 +636,7 @@ while playing:
         og_command = command
         skip = True
         command = command.replace("pick up ", "")
+        command = command.replace("get ", "")
         # Search for matching item
         found_item = None
 
@@ -643,7 +646,7 @@ while playing:
 
         print_there_is_no = True
 
-        if found_item is None and print_there_is_no and "pick up " or "get " in og_command:
+        if found_item is None and print_there_is_no:
             print("There is no %s in this room" % command)
             print()
 
@@ -651,15 +654,16 @@ while playing:
             player.inventory.append(found_item)
             player.wallet += found_item.worth
             found_item.location = player.inventory
-            print("You have a %s" % found_item.name)
+            print("You have %s" % found_item.long_name)
             print("You have $%.2f." % player.wallet)
             print()
 
         else:
             player.inventory.append(found_item)
             found_item.location = player.inventory
-            print("You have a %s" % found_item.name)
+            print("You have %s" % found_item.long_name)
             print()
+
 
 else:
     print("Command Not Recognized")
