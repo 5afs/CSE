@@ -311,8 +311,8 @@ dump_key = Key("key", dumpsters_2, "can be used to unlock the dump gates.", [dum
 zoo_key = Key("key", dumpsters, "can unlock the zoo gate.", [zoo_gate], "the key to the zoo")
 mechanical_pencil = Pencil("mechanical pencil", stationary_store, "it is plastic and has an eraser", 5,
                            "a mechanical pencil")
-number_2_pencil = Pencil("pencil", [stationary_store, clearing], "A thin, yellow, sharpened pencil with a pink eraser "
-                                                                 "on one end.", 1, "a number two pencil")
+number_2_pencil = Pencil("pencil", stationary_store, "A thin, yellow, sharpened pencil with a pink eraser "
+                                                     "on one end.", 1, "a number two pencil")
 box_of_chocolates = FerreroRocher("box of chocolates", candy_store, "a clear plastic box filled with twelve Ferrero "
                                                                     "Rocher candies", 12,
                                   "A Box of Ferrero Rocher Chocolates")
@@ -633,26 +633,21 @@ while playing:
 
     elif "pick up " or "get " in command.lower():  # get object out of command
         moves += 1
+        og_command = command
         skip = True
         command = command.replace("pick up ", "")
         command = command.replace("get ", "")
         # Search for matching item
         found_item = None
-        item_name_list = []
 
         for item in item_list:
-            item_name_list.append(item.name)
-
-        for item in item_name_list:
-            if item == command:
+            if item.name == command and item.location == player.location:
                 found_item = item
 
         print_there_is_no = True
 
-        if found_item:
-            player.inventory.append(found_item)
-            found_item.location = player.inventory
-            print("You have %s" % found_item.long_name)
+        if found_item is None and print_there_is_no:
+            print("There is no %s in this room" % command)
             print()
 
         elif isinstance(found_item, Money):
@@ -664,7 +659,9 @@ while playing:
             print()
 
         else:
-            print("There is no %s in this room" % command)
+            player.inventory.append(found_item)
+            found_item.location = player.inventory
+            print("You have %s" % found_item.long_name)
             print()
 
 
