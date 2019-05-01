@@ -8,32 +8,39 @@ import csv
 
 
 def reverse(num: list):
-    print(num[::-1])
+    digits = (num[::-1])
+    return digits
 
 
 def multiply_odd_spaces_and_subtracting_nines(num: list):
     for index in range(len(num)):
         if index % 2 == 0:
-            num[index] *= 2
-            if int(index) > 9:
+            index = int(index) * 2
+            if index > 9:
                 index -= 9
+    return num
 
 
 def add_all(my_list: list):
     total = 0
     for digit in my_list:
-        total += digit
+        total += int(digit)
     return total
 
 
-def check():
-    if (int(digits) + last_digit) % 10 == 0:
-        return True
+def validate(digits: list):
+    if len(digits) == 16:
+        last_digit = digits[15]
+        digits.pop(15)
+        reversed_version = reverse(digits)
+        multiplied = multiply_odd_spaces_and_subtracting_nines(reversed_version)
+        sum1 = add_all(multiplied)
+        return sum1 % 10 == last_digit
     return False
 
 
 with open("Book1.csv", 'r') as old_csv:
-    with open("MyNewFile.csv", 'w') as new_csv:
+    with open("MyNewFile.csv", 'w', newline='') as new_csv:
         reader = csv.reader(old_csv)
         writer = csv.writer(new_csv)
         print("Processing...")
@@ -42,11 +49,6 @@ with open("Book1.csv", 'r') as old_csv:
             old_number = row[0]
             digits = list(old_number)
 
-            if len(digits) == 16:
-                last_digit = digits[15]
-                digits.remove(last_digit)
-                reverse(digits)
-                multiply_odd_spaces_and_subtracting_nines(digits)
-                add_all(digits)
-                check()
+            if not validate(digits):
+                writer.writerow(row)
         print("OK")
