@@ -14,10 +14,12 @@ def reverse(num: list):
 
 def multiply_odd_spaces_and_subtracting_nines(num: list):
     for index in range(len(num)):
+        num[index] = int(num[index])
         if index % 2 == 0:
-            index = int(index) * 2
-            if index > 9:
-                index -= 9
+            num[index] *= 2
+
+            if num[index] > 9:
+                num[index] -= 9
     return num
 
 
@@ -30,12 +32,13 @@ def add_all(my_list: list):
 
 def validate(digits: list):
     if len(digits) == 16:
-        last_digit = digits[15]
-        digits.pop(15)
+        # print(digits)
+        last_digit = digits.pop(15)
         reversed_version = reverse(digits)
         multiplied = multiply_odd_spaces_and_subtracting_nines(reversed_version)
         sum1 = add_all(multiplied)
-        return sum1 % 10 == last_digit
+        # print(sum1)
+        return sum1 % 10 == int(last_digit)
     return False
 
 
@@ -49,6 +52,6 @@ with open("Book1.csv", 'r') as old_csv:
             old_number = row[0]
             digits = list(old_number)
 
-            if not validate(digits):
+            if validate(digits):
                 writer.writerow(row)
         print("OK")
