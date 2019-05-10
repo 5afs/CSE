@@ -16,9 +16,12 @@ with open("Sales Records (1).csv", 'r') as old_csv:
         except KeyError:
             different_items[item_type] = old_number
 
-    for value in different_items:
-       
+    best_key = ""
+    best_value = max(different_items.values())
 
-    print(different_items)
-    best_product = max(different_items)
-    print(best_product)
+    for key, value in different_items.items():
+        if value == best_value:
+            best_key = key
+
+print()
+print("The best product is %s at $%s." % (best_key, best_value))

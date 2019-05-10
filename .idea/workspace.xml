@@ -42,9 +42,25 @@
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/notes/Sales Records (1).csv">
-              <provider selected="true" editor-type-id="LargeFileEditor">
-                <state relative-caret-position="17">
-                  <caret line="1" column="38" selection-start-line="1" selection-start-column="32" selection-end-line="1" selection-end-column="38" />
+              <provider selected="true" editor-type-id="csv-data-editor">
+                <state>
+                  <format>
+                    <csv-format name="Comma-separated (CSV)" id="Comma-separated (CSV)_id">
+                      <data>
+                        <record-format prefix="" suffix="" nullText="" quotationPolicy="as needed" valueSeparator="," recordSeparator="&#10;">
+                          <quotation>
+                            <quotes left="&quot;" right="&quot;" leftEscaped="&quot;&quot;" rightEscaped="&quot;&quot;" />
+                            <quotes left="'" right="'" leftEscaped="''" rightEscaped="''" />
+                          </quotation>
+                        </record-format>
+                      </data>
+                    </csv-format>
+                  </format>
+                </state>
+              </provider>
+              <provider editor-type-id="LargeFileEditor">
+                <state relative-caret-position="238">
+                  <caret line="14" column="30" lean-forward="true" selection-start-line="14" selection-start-column="30" selection-end-line="14" selection-end-column="30" />
                 </state>
               </provider>
             </entry>
@@ -52,7 +68,7 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/notes/Delaney Kelly - Sales Profits.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="68">
+                <state relative-caret-position="85">
                   <caret line="5" column="32" selection-start-line="5" selection-start-column="32" selection-end-line="5" selection-end-column="32" />
                 </state>
               </provider>
@@ -65,8 +81,8 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/notes/Delaney Kelly - Sales Profits.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="323">
-                  <caret line="19" column="7" selection-start-line="19" selection-start-column="7" selection-end-line="19" selection-end-column="7" />
+                <state relative-caret-position="331">
+                  <caret line="25" column="7" selection-start-line="25" selection-start-column="7" selection-end-line="25" selection-end-column="7" />
                 </state>
               </provider>
             </entry>
@@ -139,6 +155,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -155,7 +172,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -337,11 +353,12 @@
       <workItem from="1557240593157" duration="1964000" />
       <workItem from="1557326915705" duration="3358000" />
       <workItem from="1557413403365" duration="3262000" />
+      <workItem from="1557503931671" duration="2518000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="35815000" />
+    <option name="totallyTimeSpent" value="38333000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -349,10 +366,10 @@
     <layout>
       <window_info id="Structure" order="0" sideWeight="0.50163937" side_tool="true" weight="0.32980332" />
       <window_info id="Favorites" order="1" side_tool="true" weight="0.32980332" />
-      <window_info content_ui="combo" id="Project" order="2" sideWeight="0.49836066" visible="true" weight="0.15085287" />
+      <window_info content_ui="combo" id="Project" order="2" sideWeight="0.49836066" weight="0.15245202" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49848714" visible="true" weight="0.3261105" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49848714" visible="true" weight="0.46045503" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3997833" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -401,7 +418,7 @@
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/CSE$CSV_Notes.coverage" NAME="CSV Notes Coverage Results" MODIFIED="1556551683822" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/notes" />
     <SUITE FILE_PATH="coverage/CSE$Delaney_Kelly___Object_World_Map.coverage" NAME="Delaney Kelly - Object World Map Coverage Results" MODIFIED="1556293527603" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/notes" />
-    <SUITE FILE_PATH="coverage/CSE$Delaney_Kelly___Sales_Profits.coverage" NAME="Delaney Kelly - Sales Profits Coverage Results" MODIFIED="1557416139993" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/notes" />
+    <SUITE FILE_PATH="coverage/CSE$Delaney_Kelly___Sales_Profits.coverage" NAME="Delaney Kelly - Sales Profits Coverage Results" MODIFIED="1557506476612" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/notes" />
     <SUITE FILE_PATH="coverage/CSE$Delaney_Kelly___Validator.coverage" NAME="Delaney Kelly - Validator Coverage Results" MODIFIED="1556901770189" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/notes" />
   </component>
   <component name="editorHistoryManager">
@@ -531,16 +548,32 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/notes/Sales Records (1).csv">
-      <provider selected="true" editor-type-id="LargeFileEditor">
-        <state relative-caret-position="17">
-          <caret line="1" column="38" selection-start-line="1" selection-start-column="32" selection-end-line="1" selection-end-column="38" />
+      <provider selected="true" editor-type-id="csv-data-editor">
+        <state>
+          <format>
+            <csv-format name="Comma-separated (CSV)" id="Comma-separated (CSV)_id">
+              <data>
+                <record-format prefix="" suffix="" nullText="" quotationPolicy="as needed" valueSeparator="," recordSeparator="&#10;">
+                  <quotation>
+                    <quotes left="&quot;" right="&quot;" leftEscaped="&quot;&quot;" rightEscaped="&quot;&quot;" />
+                    <quotes left="'" right="'" leftEscaped="''" rightEscaped="''" />
+                  </quotation>
+                </record-format>
+              </data>
+            </csv-format>
+          </format>
+        </state>
+      </provider>
+      <provider editor-type-id="LargeFileEditor">
+        <state relative-caret-position="238">
+          <caret line="14" column="30" lean-forward="true" selection-start-line="14" selection-start-column="30" selection-end-line="14" selection-end-column="30" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/notes/Delaney Kelly - Sales Profits.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="19" column="7" selection-start-line="19" selection-start-column="7" selection-end-line="19" selection-end-column="7" />
+        <state relative-caret-position="331">
+          <caret line="25" column="7" selection-start-line="25" selection-start-column="7" selection-end-line="25" selection-end-column="7" />
         </state>
       </provider>
     </entry>
