@@ -118,10 +118,10 @@ lemonade_stand = Room("The Lemonade Stand",
                       "the gate to the zoo. To the West is the East Park Gate. ")
 
 well = Room("A Well",
-            "forest", "clearing", None, None, None, None, None, None,
+            None, None, "clearing", None, None, "gate_1", None, None,
             "You are in a small clearing. In the middle of the clearing is a well. There is a rope going \n"
-            "into it and there is a bucket on the end. To the north, the path leads into the forest and to \n"
-            "the East is another trail. ")
+            "into it and there is a bucket on the end. To the northwest, the path leads out of the forest and to \n"
+            "the south, the path continues into the forest. ")
 
 clearing = Room("A Clearing",
                 "well", None, "gate_3", None, None, None, None, None,
@@ -131,7 +131,9 @@ clearing = Room("A Clearing",
 benches = Room("The Picnic Area",
                "fountain", None, None, None, None, None, None, None,
                "You are in the middle of a group of picnic benches. There is a sleeping park guard on one of \n"
-               "the benches. You can see his keyring on the bench behind him. To the north is a fountain. ")
+               "the benches. You can see his keyring on the bench behind him. If you try to get the keys, there \n"
+               "is a chance that you will wake him up, but that is the only way to unlock the park gates. \n"
+               "To the north is a fountain. ")
 
 fountain = Room("The Fountain",
                 None, None, "benches", None, "gate_2", "under_bridge", None, None,
@@ -188,8 +190,8 @@ dumpsters_2 = Room("Another Side Alley",
 gate_1 = Gate("The West Park Gate",
               "alley", "bridge", "dump_gate", None, None, None, "clearing", None,
               "You are standing in front of a big iron gate. It is locked but through the bars you can see \n"
-              "outside the park. To the North is the alley. To the South is \n"
-              "the main gate to the city dump. Inside the park, to the East is a Bridge. To the Southeast is a dark \n"
+              "outside the park. To the North is the alley. To the South is the main gate to the city dump. \n"
+              "Inside the park, to the East is a Bridge. To the Southeast is a dark \n"
               "forest and you can barely see a narrow dirt trail going into it. ",
 
               "You are standing in a big, unlocked, iron gate open to the park. To the South is \n"
@@ -304,30 +306,32 @@ class Coupon(Item):
         self.worth = worth
 
 
-park_keyring = Key("keyring", benches, "can be used to unlock the park gates.", [gate_1, gate_2, gate_3],
+park_keyring = Key("keyring", [benches], "can be used to unlock the park gates.", [gate_1, gate_2, gate_3],
                    "the park keys")
-dump_key = Key("key", dumpsters_2, "can be used to unlock the dump gates.", [dump_gate, dump_gate_2],
+dump_key = Key("key", [dumpsters_2], "can be used to unlock the dump gates.", [dump_gate, dump_gate_2],
                "the key to the dump")
-zoo_key = Key("key", dumpsters, "can unlock the zoo gate.", [zoo_gate], "the key to the zoo")
-mechanical_pencil = Pencil("mechanical pencil", stationary_store, "it is plastic and has an eraser", 5,
+zoo_key = Key("key", [dumpsters], "can unlock the zoo gate.", [zoo_gate], "the key to the zoo")
+mechanical_pencil = Pencil("mechanical pencil", [stationary_store], "it is plastic and has an eraser", 5,
                            "a mechanical pencil")
-number_2_pencil = Pencil("pencil", stationary_store, "A thin, yellow, sharpened pencil with a pink eraser "
-                                                     "on one end.", 1, "a number two pencil")
-box_of_chocolates = FerreroRocher("box of chocolates", candy_store, "a clear plastic box filled with twelve Ferrero "
-                                                                    "Rocher candies", 12,
+number_2_pencil = Pencil("pencil", [clearing, stationary_store], "A thin, yellow, sharpened pencil with a pink eraser "
+                                                                 "on one end.", 1, "a number two pencil")
+box_of_chocolates = FerreroRocher("box of chocolates", [candy_store], "a clear plastic box filled with twelve Ferrero "
+                                                                      "Rocher candies", 12,
                                   "A Box of Ferrero Rocher Chocolates")
-small_box = Box("small box", office_store, "a very small cardboard box, about the size of a shoebox", 5, "a small box")
-regular_box = Box("box", office_store, "a medium sized box, one side is missing", 7, "a regular-sized box")
-big_box = Box("big box", office_store, "a person could definitely fit inside", 10, "a big box")
-penny = Money("penny", fountain, "a penny", 0.01, None)
-quarter = Money("quarter", fountain, "a quarter", 0.25, None)
-dollar_bill = Money("dollar bill", clearing, "a dollar bill", 1, None)
-five_dollar_bill = Money("five dollar bill", lemonade_stand, " a five dollar bill", 5, None)
-candy_store_coupon = Coupon("coupon to the candy store", office_2, "a coupon that is worth two dollars in the "
-                                                                   "Sweet Tooth Candy Store", 2,
+small_box = Box("small box", [office_store], "a very small cardboard box, about the size of a shoebox", 5,
+                "a small box")
+regular_box = Box("box", [office_store], "a medium sized box, one side is missing", 7, "a regular-sized box")
+big_box = Box("big box", [office_store], "a person could definitely fit inside", 10, "a big box")
+penny = Money("penny", [fountain], "a penny", 0.01, None)
+quarter = Money("quarter", [fountain], "a quarter", 0.25, None)
+dollar_bill = Money("dollar bill", [clearing], "a dollar bill", 1, None)
+five_dollar_bill = Money("five dollar bill", [lemonade_stand], " a five dollar bill", 5, None)
+candy_store_coupon = Coupon("coupon to the candy store", [office_2], "a coupon that is worth two dollars in the "
+                                                                     "Sweet Tooth Candy Store", 2,
                             "a $2 coupon to the Sweet Tooth Candy Store")
-stationary_store_coupon = Coupon("coupon to the stationary store", office_2, "a coupon that is worth enough to get one "
-                                                                             "free pencil from the stationary store",
+stationary_store_coupon = Coupon("coupon to the stationary store", [office_2], "a coupon that is worth enough to get "
+                                                                               "one "
+                                                                               "free pencil from the stationary store",
                                  number_2_pencil,
                                  "a coupon to the Stationary Store that is worth one free number two pencil")
 
@@ -363,7 +367,7 @@ while playing:
 
     if player.location == guard.location:
         caught_chance = random.randint(1, 100)
-        if caught_chance >= 70:
+        if caught_chance >= 50:
             if player.location == benches:
                 print("You woke the guard up. He caught you.")
                 print()
@@ -408,10 +412,24 @@ while playing:
         pos = short_directions.index(command)
         command = directions[pos]
 
-    if command.lower() in ['q', 'quit' 'exit'] or "jump" in command.lower() and player.location == bridge:
+    if command.lower() in ['q', 'quit' 'exit']:
         # ending the game
         print("GAME OVER")
         print("You have ended the game. You made %s moves." % moves)
+        playing = False
+
+        continue
+
+    elif "jump" in command.lower() and player.location == bridge:
+        print("You are falling... ")
+        print()
+        print("f a l l i n g . . . ")
+        print()
+        print("f  a  l  l  i  n  g  .  .  .  ")
+        print()
+        print("GAME OVER")
+        print("You have died. You made %s moves." % moves)
+        print("Hopefully Catherine will come to your funeral. ")
         playing = False
 
         continue
@@ -631,9 +649,8 @@ while playing:
             print("You do not have a %s." % command)
             print()
 
-    elif "pick up " or "get " in command.lower():  # get object out of command
+    elif "pick up " in command.lower() or "get " in command.lower():  # get object out of command
         moves += 1
-        og_command = command
         skip = True
         command = command.replace("pick up ", "")
         command = command.replace("get ", "")
@@ -641,13 +658,13 @@ while playing:
         found_item = None
 
         for item in item_list:
-            if item.name == command and item.location == player.location:
+            if item.name == command and player.location in item.location:
                 found_item = item
 
-        print_there_is_no = True
-
-        if found_item is None and print_there_is_no:
-            print("There is no %s in this room" % command)
+        if found_item:
+            player.inventory.append(found_item)
+            found_item.location = player.inventory
+            print("You have %s" % found_item.long_name)
             print()
 
         elif isinstance(found_item, Money):
@@ -659,9 +676,7 @@ while playing:
             print()
 
         else:
-            player.inventory.append(found_item)
-            found_item.location = player.inventory
-            print("You have %s" % found_item.long_name)
+            print("There is no %s in this room" % command)
             print()
 
 

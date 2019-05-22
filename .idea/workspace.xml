@@ -37,59 +37,26 @@
     <favorites_list name="CSE" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.41180164">
-      <split-first>
-        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/notes/Sales Records (1).csv">
-              <provider selected="true" editor-type-id="csv-data-editor">
-                <state>
-                  <format>
-                    <csv-format name="Comma-separated (CSV)" id="Comma-separated (CSV)_id">
-                      <data>
-                        <record-format prefix="" suffix="" nullText="" quotationPolicy="as needed" valueSeparator="," recordSeparator="&#10;">
-                          <quotation>
-                            <quotes left="&quot;" right="&quot;" leftEscaped="&quot;&quot;" rightEscaped="&quot;&quot;" />
-                            <quotes left="'" right="'" leftEscaped="''" rightEscaped="''" />
-                          </quotation>
-                        </record-format>
-                      </data>
-                    </csv-format>
-                  </format>
-                </state>
-              </provider>
-              <provider editor-type-id="LargeFileEditor">
-                <state relative-caret-position="238">
-                  <caret line="14" column="30" lean-forward="true" selection-start-line="14" selection-start-column="30" selection-end-line="14" selection-end-column="30" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/notes/Delaney Kelly - Sales Profits.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="85">
-                  <caret line="5" column="32" selection-start-line="5" selection-start-column="32" selection-end-line="5" selection-end-column="32" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-first>
-      <split-second>
-        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/notes/Delaney Kelly - Sales Profits.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="331">
-                  <caret line="25" column="7" selection-start-line="25" selection-start-column="7" selection-end-line="25" selection-end-column="7" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-second>
-    </splitter>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/notes/Delaney Kelly - Sales Profits.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="153">
+              <caret line="9" column="30" selection-start-line="9" selection-start-column="30" selection-end-line="9" selection-end-column="30" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/notes/Delaney Kelly - Object World Map.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="82">
+              <caret line="431" column="25" selection-start-line="431" selection-start-column="25" selection-end-line="431" selection-end-column="25" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -119,8 +86,9 @@
       <find>q</find>
       <find>player.move</find>
       <find>forest</find>
-      <find>forest</find>
       <find>get</find>
+      <find>picnic</find>
+      <find>benches</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -138,14 +106,14 @@
         <option value="$PROJECT_DIR$/notes/Extra Space.py" />
         <option value="$PROJECT_DIR$/notes/Delaney Kelly - Items.py" />
         <option value="$PROJECT_DIR$/notes/Object World Map - Showcase.py" />
-        <option value="$PROJECT_DIR$/notes/Delaney Kelly - Object World Map.py" />
         <option value="$PROJECT_DIR$/notes/CSV Notes.py" />
         <option value="$PROJECT_DIR$/notes/Delaney Kelly - Validator.py" />
         <option value="$PROJECT_DIR$/notes/Delaney Kelly - Sales Profits.py" />
+        <option value="$PROJECT_DIR$/notes/Delaney Kelly - Object World Map.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="28" />
     <option name="width" value="1346" />
     <option name="height" value="683" />
@@ -155,7 +123,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -172,13 +139,15 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file://C:/Users/5afs/Documents/GitHub/CSE/notes/notes/Extra Space.py" />
+    <property name="ToolWindowRun.ShowToolbar" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/notes" />
     <property name="restartRequiresConfirmation" value="false" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
@@ -205,7 +174,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.Delaney Kelly - Sales Profits">
+  <component name="RunManager" selected="Python.Delaney Kelly - Object World Map">
     <configuration name="CSV Notes" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="CSE" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -325,10 +294,10 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.Delaney Kelly - Object World Map" />
         <item itemvalue="Python.Delaney Kelly - Sales Profits" />
         <item itemvalue="Python.Delaney Kelly - Validator" />
         <item itemvalue="Python.CSV Notes" />
-        <item itemvalue="Python.Delaney Kelly - Object World Map" />
         <item itemvalue="Python.Delaney Kelly - Items" />
       </list>
     </recent_temporary>
@@ -353,23 +322,26 @@
       <workItem from="1557240593157" duration="1964000" />
       <workItem from="1557326915705" duration="3358000" />
       <workItem from="1557413403365" duration="3262000" />
-      <workItem from="1557503931671" duration="2518000" />
+      <workItem from="1557503931671" duration="2779000" />
+      <workItem from="1557758938962" duration="2284000" />
+      <workItem from="1557845479927" duration="1320000" />
+      <workItem from="1557931693211" duration="952000" />
+      <workItem from="1558536643107" duration="3946000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="38333000" />
+    <option name="totallyTimeSpent" value="47096000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
     <layout>
       <window_info id="Structure" order="0" sideWeight="0.50163937" side_tool="true" weight="0.32980332" />
       <window_info id="Favorites" order="1" side_tool="true" weight="0.32980332" />
-      <window_info content_ui="combo" id="Project" order="2" sideWeight="0.49836066" weight="0.15245202" />
+      <window_info content_ui="combo" id="Project" order="2" sideWeight="0.49836066" visible="true" weight="0.15724947" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49848714" visible="true" weight="0.46045503" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49848714" visible="true" weight="0.7107259" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3997833" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -417,7 +389,7 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/CSE$CSV_Notes.coverage" NAME="CSV Notes Coverage Results" MODIFIED="1556551683822" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/notes" />
-    <SUITE FILE_PATH="coverage/CSE$Delaney_Kelly___Object_World_Map.coverage" NAME="Delaney Kelly - Object World Map Coverage Results" MODIFIED="1556293527603" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/notes" />
+    <SUITE FILE_PATH="coverage/CSE$Delaney_Kelly___Object_World_Map.coverage" NAME="Delaney Kelly - Object World Map Coverage Results" MODIFIED="1558542214384" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/notes" />
     <SUITE FILE_PATH="coverage/CSE$Delaney_Kelly___Sales_Profits.coverage" NAME="Delaney Kelly - Sales Profits Coverage Results" MODIFIED="1557506476612" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/notes" />
     <SUITE FILE_PATH="coverage/CSE$Delaney_Kelly___Validator.coverage" NAME="Delaney Kelly - Validator Coverage Results" MODIFIED="1556901770189" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/notes" />
   </component>
@@ -471,13 +443,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/notes/Object World Map - Showcase.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="155">
-          <caret line="384" selection-start-line="384" selection-end-line="384" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/notes/Object World Map - Showcase.py" />
     <entry file="file://$PROJECT_DIR$/notes/CSV Notes.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="132">
@@ -503,13 +469,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/notes/Delaney Kelly - Validator.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="867">
-          <caret line="51" column="31" selection-start-line="50" selection-start-column="8" selection-end-line="51" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/notes/Delaney Kelly - Lucky 7s.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -526,13 +485,6 @@
     <entry file="file://$PROJECT_DIR$/notes/Delaney Kelly - Guess Game.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/notes/Delaney Kelly - Object World Map.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3715">
-          <caret line="410" column="44" lean-forward="true" selection-start-line="410" selection-start-column="44" selection-end-line="410" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/notes/Basic Python Notes.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-57">
@@ -548,6 +500,11 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/notes/Sales Records (1).csv">
+      <provider editor-type-id="LargeFileEditor">
+        <state relative-caret-position="238">
+          <caret line="14" column="30" selection-start-line="14" selection-start-column="30" selection-end-line="14" selection-end-column="30" />
+        </state>
+      </provider>
       <provider selected="true" editor-type-id="csv-data-editor">
         <state>
           <format>
@@ -564,16 +521,25 @@
           </format>
         </state>
       </provider>
-      <provider editor-type-id="LargeFileEditor">
-        <state relative-caret-position="238">
-          <caret line="14" column="30" lean-forward="true" selection-start-line="14" selection-start-column="30" selection-end-line="14" selection-end-column="30" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/notes/Delaney Kelly - Validator.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="657">
+          <caret line="51" column="31" selection-start-line="50" selection-start-column="8" selection-end-line="51" selection-end-column="31" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/notes/Delaney Kelly - Sales Profits.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="331">
-          <caret line="25" column="7" selection-start-line="25" selection-start-column="7" selection-end-line="25" selection-end-column="7" />
+        <state relative-caret-position="153">
+          <caret line="9" column="30" selection-start-line="9" selection-start-column="30" selection-end-line="9" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/notes/Delaney Kelly - Object World Map.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="82">
+          <caret line="431" column="25" selection-start-line="431" selection-start-column="25" selection-end-line="431" selection-end-column="25" />
         </state>
       </provider>
     </entry>
