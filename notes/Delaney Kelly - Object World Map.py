@@ -1,8 +1,10 @@
 import random
 
+print()
 print("Today is Catherine's birthday. You need to get her a number 2 pencil so she can copy your homework, a box of \n"
       "chocolates for her to eat, and a large box for her to live in. You have $5 but you will need more to buy\n"
       "these things.")
+print()
 print()
 
 
@@ -209,7 +211,7 @@ gate_2 = Gate("The East Park Gate",
 
               "You are standing in an open iron gate that leads to the park. In the park, to the \n"
               "West is a bridge and to the Southwest is a circular fountain that is shooting water into a \n"
-              "large tile pool. To the North, not in the park, is the Sweet Tooth Candy Store. To the East \n"
+              "large tile pool. To the North, not in the park, is alley. To the East \n"
               "is a lemonade stand. To the Southeast is the gate to the zoo.",
               ["alley", "lemonade_stand", "zoo_gate"],
               None, None, 0, True)
@@ -649,7 +651,8 @@ while playing:
             print("You do not have a %s." % command)
             print()
 
-    elif "pick up " in command.lower() or "get " in command.lower():  # get object out of command
+    elif "pick up " in command.lower() or "get " in command.lower() or "take" in command.lower():
+        # get object out of command
         moves += 1
         skip = True
         command = command.replace("pick up ", "")
